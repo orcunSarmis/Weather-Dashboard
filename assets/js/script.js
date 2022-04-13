@@ -1,10 +1,11 @@
 var searchBtn = document.getElementById("searchBtn");
-var requestUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=30.489772&lon=-99.771335&units=metric&exclude=daily.temp&daily.humidity&daily.uvi&daily.wind_speed&appid=5ee2ef72f8bcd5f71cb4cc0992822390";
+var requestUrl = "https://api.openweathermap.org/data/2.5/weather?q=city&units=metric&exclude=daily.temp&daily.humidity&daily.uvi&daily.wind_speed&appid=5ee2ef72f8bcd5f71cb4cc0992822390";
 var responseText = document.getElementById("response-text");
 var cityFormEl = document.querySelector('#city-form');
 var userInputEl = document.querySelector('#userSearch');
 var repoSearchTerm = document.querySelector('#repo-search-term');
-var repoContainerEl = document.querySelector('#repos-container');
+var weatherContainerEl = document.querySelector('#weather-container');
+var reportSearchTerm = document.querySelector('#report-search-term');
 
 var formSubmitHandler = function (event) {
     event.preventDefault();
@@ -12,9 +13,9 @@ var formSubmitHandler = function (event) {
     var userSearch = userInputEl.value.trim();
   
     if (userSearch) {
-      getApi(userSearch);
+      getApi("https://api.openweathermap.org/data/2.5/weather?q=city&units=metric&exclude=daily.temp&daily.humidity&daily.uvi&daily.wind_speed&appid=5ee2ef72f8bcd5f71cb4cc0992822390");
   
-      repoContainerEl.textContent = '';
+      weatherContainerEl.textContent = '';
       userInputEl.value = '';
     } else {
       alert('Please enter a City!');
@@ -25,15 +26,34 @@ var formSubmitHandler = function (event) {
 function getApi(requestUrl) {
     fetch(requestUrl)
     .then(function (response) {
-        console.log(response);
-        return response.json();
-        
+        if (response.ok){
+            response.json().then(function (data) {
+                displayReport(data);
+            });
+        }else {
+            alert("eError: " + response.statusText);
+        }
     })
-    .then(function (data) {
-        console.log(data);
+        .catch(function (error) {
+            alert("UPPPSSS");
+        });
+        // console.log(response);
+        // return response.json();       
+    };
+
+    var displayReport = function (searchTerm) {
+        weatherContainerEl.textContent = "No Report Found.";
+        return;
+        reportSearchTerm.textContent = searchTerm;
+
+        // repoContainerEl.appendChild();
+    };
+
+     
+    // .then(function (data) {
+    //     console.log(data);
         
-    })
-}
+    // })
 getApi(requestUrl);
 
 cityFormEl.addEventListener('submit', formSubmitHandler);
