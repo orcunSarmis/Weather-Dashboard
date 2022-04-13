@@ -43,7 +43,7 @@ function getApi(requestUrl) {
     };
 
     var displayReport = function (searchTerm) {
-        console.log(searchTerm.weather[0].description);
+        console.log(searchTerm.list[0].weather[0].description);
         if (daily.length === 0) {
         weatherContainerEl.textContent = "No Report Found.";
         return;
