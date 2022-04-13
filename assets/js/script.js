@@ -13,7 +13,7 @@ var formSubmitHandler = function (event) {
     var userSearch = userInputEl.value.trim();
   
     if (userSearch) {
-      getApi("https://api.openweathermap.org/data/2.5/weather?q=city&units=metric&exclude=daily.temp&daily.humidity&daily.uvi&daily.wind_speed&appid=5ee2ef72f8bcd5f71cb4cc0992822390");
+      getApi("https://api.openweathermap.org/data/2.5/weather?q=" + userSearch + "&exclude=daily.temp&daily.humidity&daily.uvi&daily.wind_speed&units=metric&appid=5ee2ef72f8bcd5f71cb4cc0992822390");
   
       weatherContainerEl.textContent = '';
       userInputEl.value = '';
@@ -28,6 +28,7 @@ function getApi(requestUrl) {
     .then(function (response) {
         if (response.ok){
             response.json().then(function (data) {
+                console.log(data);
                 displayReport(data);
             });
         }else {
@@ -42,20 +43,35 @@ function getApi(requestUrl) {
     };
 
     var displayReport = function (searchTerm) {
+        if (daily.lenght === 0) {
         weatherContainerEl.textContent = "No Report Found.";
         return;
+        }  
+
         reportSearchTerm.textContent = searchTerm;
 
-        // repoContainerEl.appendChild();
+        for (var i = 0; i < daily.length; index++) {
+            var report = daily[i];
+           
+            var reportEl = document.createElement("div");
+            reportEl.classList =  'list-item flex-row justify-space-between align-center';
+
+            reportEl.appendChild();
+
+            weatherContainerEl.appendChild(reportEl);
+        }
+        
     };
 
      
+
+
+cityFormEl.addEventListener('submit', formSubmitHandler);
+
     // .then(function (data) {
     //     console.log(data);
         
     // })
-getApi(requestUrl);
-
-cityFormEl.addEventListener('submit', formSubmitHandler);
+// getApi(requestUrl);
 
 // responseText.textContent = response.data;
