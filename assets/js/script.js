@@ -1,5 +1,5 @@
 var searchBtn = document.getElementById("searchBtn");
-var requestUrl = "https://api.openweathermap.org/data/2.5/weather?q=city&units=metric&exclude=daily.temp&daily.humidity&daily.uvi&daily.wind_speed&appid=5ee2ef72f8bcd5f71cb4cc0992822390";
+var requestUrl = "https://api.openweathermap.org/data/2.5/forecast?q=city&units=metric&exclude=daily.temp&daily.humidity&daily.uvi&daily.wind_speed&appid=5ee2ef72f8bcd5f71cb4cc0992822390";
 var responseText = document.getElementById("response-text");
 var cityFormEl = document.querySelector('#city-form');
 var userInputEl = document.querySelector('#userSearch');
@@ -13,7 +13,7 @@ var formSubmitHandler = function (event) {
     var userSearch = userInputEl.value.trim();
   
     if (userSearch) {
-      getApi("https://api.openweathermap.org/data/2.5/weather?q=" + userSearch + "&exclude=daily.temp&daily.humidity&daily.uvi&daily.wind_speed&units=metric&appid=5ee2ef72f8bcd5f71cb4cc0992822390");
+      getApi("https://api.openweathermap.org/data/2.5/forecast?q=" + userSearch + "&exclude=daily.temp&daily.humidity&daily.uvi&daily.wind_speed&units=metric&appid=5ee2ef72f8bcd5f71cb4cc0992822390");
   
       weatherContainerEl.textContent = '';
       userInputEl.value = '';
@@ -43,7 +43,8 @@ function getApi(requestUrl) {
     };
 
     var displayReport = function (searchTerm) {
-        if (daily.lenght === 0) {
+        console.log(searchTerm.weather[0].description);
+        if (daily.length === 0) {
         weatherContainerEl.textContent = "No Report Found.";
         return;
         }  
