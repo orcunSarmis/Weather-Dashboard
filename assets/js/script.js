@@ -29,7 +29,8 @@ function getApi(requestUrl) {
         if (response.ok){
             response.json().then(function (data) {
                 console.log(data);
-                weatherContainerEl.innerHTML = daily;
+                weatherContainerEl.innerHTML = data.city.name;
+                weatherContainerEl.innerHTML = data.list[0].dt_txt;
                 displayReport(data);
             });
         }else {
