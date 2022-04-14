@@ -32,7 +32,13 @@ function getApi(requestUrl) {
             response.json().then(function (data) {
                 console.log(data);
                 cardHeaderEl.innerHTML = data.city.name;
-                weatherContainerEl.innerHTML = data.list[0].dt_txt;
+                weatherContainerEl.innerHTML = data.list[0].main.temp;
+                weatherContainerEl.innerHTML = data.list[0].main.humidity;
+                weatherContainerEl.innerHTML = data.list[0].wind.speed;
+                console.log("Temp:", data.list[0].main.temp,
+                "Humidity:", data.list[0].main.humidity,
+                "Wind speed:", data.list[0].wind.speed
+                );
                 displayReport(data);
             });
         }else {
