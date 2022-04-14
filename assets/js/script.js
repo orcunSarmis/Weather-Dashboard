@@ -6,6 +6,7 @@ var userInputEl = document.querySelector('#userSearch');
 var repoSearchTerm = document.querySelector('#repo-search-term');
 var weatherContainerEl = document.querySelector('#weather-container');
 var reportSearchTerm = document.querySelector('#report-search-term');
+var cardHeaderEl = document.querySelector("#cardHead");
 
 var formSubmitHandler = function (event) {
     event.preventDefault();
@@ -14,7 +15,8 @@ var formSubmitHandler = function (event) {
   
     if (userSearch) {
       getApi("https://api.openweathermap.org/data/2.5/forecast?per_page=5&q=" + userSearch + "&exclude=daily.temp&daily.humidity&daily.uvi&daily.wind_speed&units=metric&appid=5ee2ef72f8bcd5f71cb4cc0992822390");
-  
+        
+      cardHeaderEl.textContent = '';
       weatherContainerEl.textContent = '';
       userInputEl.value = '';
     } else {
@@ -29,7 +31,7 @@ function getApi(requestUrl) {
         if (response.ok){
             response.json().then(function (data) {
                 console.log(data);
-                weatherContainerEl.innerHTML = data.city.name;
+                cardHeaderEl.innerHTML = data.city.name;
                 weatherContainerEl.innerHTML = data.list[0].dt_txt;
                 displayReport(data);
             });
