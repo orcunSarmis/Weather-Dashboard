@@ -31,10 +31,8 @@ function getApi(requestUrl) {
         if (response.ok){
             response.json().then(function (data) {
                 console.log(data);
-                cardHeaderEl.innerHTML = data.city.name;
-                weatherContainerEl.innerHTML = data.list[0].main.temp;
-                weatherContainerEl.innerHTML = data.list[0].main.humidity;
-                weatherContainerEl.innerHTML = data.list[0].wind.speed;
+                weatherContainerEl.innerHTML = "<h1>" + data.city.name + "</h1><h3>Temp: " + data.list[0].main.temp + "</h3><h3>Humidity: " + data.list[0].main.humidity + "</h3><h3>Wind Speed: " + data.list[0].wind.speed + "</h3>";
+
                 console.log("Temp:", data.list[0].main.temp,
                 "Humidity:", data.list[0].main.humidity,
                 "Wind speed:", data.list[0].wind.speed
