@@ -1,5 +1,5 @@
 var searchBtn = document.getElementById("searchBtn");
-var requestUrl = "https://api.openweathermap.org/data/2.5/forecast?q=city&units=metric&exclude=daily.temp&daily.humidity&daily.uvi&daily.wind_speed&appid=5ee2ef72f8bcd5f71cb4cc0992822390";
+var requestUrl = "https://api.openweathermap.org/data/2.5/forecast?per_page=5&q=city&units=metric&exclude=daily.temp&daily.humidity&daily.uvi&daily.wind_speed&appid=5ee2ef72f8bcd5f71cb4cc0992822390";
 var responseText = document.getElementById("response-text");
 var cityFormEl = document.querySelector('#city-form');
 var userInputEl = document.querySelector('#userSearch');
@@ -13,7 +13,7 @@ var formSubmitHandler = function (event) {
     var userSearch = userInputEl.value.trim();
   
     if (userSearch) {
-      getApi("https://api.openweathermap.org/data/2.5/forecast?q=" + userSearch + "&exclude=daily.temp&daily.humidity&daily.uvi&daily.wind_speed&units=metric&appid=5ee2ef72f8bcd5f71cb4cc0992822390");
+      getApi("https://api.openweathermap.org/data/2.5/forecast?per_page=5&q=" + userSearch + "&exclude=daily.temp&daily.humidity&daily.uvi&daily.wind_speed&units=metric&appid=5ee2ef72f8bcd5f71cb4cc0992822390");
   
       weatherContainerEl.textContent = '';
       userInputEl.value = '';
@@ -29,10 +29,11 @@ function getApi(requestUrl) {
         if (response.ok){
             response.json().then(function (data) {
                 console.log(data);
+                weatherContainerEl.innerHTML = daily;
                 displayReport(data);
             });
         }else {
-            alert("eError: " + response.statusText);
+            alert("error: " + response.statusText);
         }
     })
         .catch(function (error) {
@@ -57,15 +58,15 @@ function getApi(requestUrl) {
             var reportEl = document.createElement("div");
             reportEl.classList =  'list-item flex-row justify-space-between align-center';
 
-            reportEl.appendChild();
+            
 
+            // 
+            reportEl.appendChild();
+            // 
             weatherContainerEl.appendChild(reportEl);
         }
         
     };
-
-     
-
 
 cityFormEl.addEventListener('submit', formSubmitHandler);
 
