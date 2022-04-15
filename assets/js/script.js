@@ -1,11 +1,13 @@
 var searchBtn = document.getElementById("searchBtn");
 var requestUrl = "https://api.openweathermap.org/data/2.5/forecast?&q=city&cnt=5&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
-var fiveDaysUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + userSearch + "&cnt=5&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
+
 var cityFormEl = document.querySelector('#city-form');
 var userInputEl = document.querySelector('#userSearch');
 var weatherContainerEl = document.querySelector('#weather-container');
 var reportSearchTerm = document.querySelector('#report-search-term');
 var cardHeaderEl = document.querySelector("#cardHead");
+
+var userSearch = "";
 
 var formSubmitHandler = function (event) {
     event.preventDefault();
@@ -42,9 +44,11 @@ function getApi(requestUrl) {
                 "Humidity:", data.list[0].main.humidity,
                 "Wind speed:", data.list[0].wind.speed);
 
-                lat = res2.data.city.coord.lat;
-                lon = res2.data.city.coord.lon;
-                
+                lat = data.city.coord.lat;
+                lon = data.city.coord.lon;
+
+                var fiveDaysUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + userSearch + "&cnt=5&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
+
                 fetch(fiveDaysUrl).then((res2) => {
                     console.log("weatherContainerEl", res2);
                 })
