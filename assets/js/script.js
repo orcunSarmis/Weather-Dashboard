@@ -12,7 +12,7 @@ var userSearch = "";
 var formSubmitHandler = function (event) {
     event.preventDefault();
 
-    var userSearch = userInputEl.value.trim();
+    userSearch = userInputEl.value.trim();
   
     if (userSearch) {
         getApi("https://api.openweathermap.org/data/2.5/forecast?q=" + userSearch + "&cnt=5&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial");
@@ -38,7 +38,7 @@ function getApi(requestUrl) {
                 data.list[0].weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'><h3>Date: " 
                 + data.list[0].dt_txt + "</h3><h3>Temp: " + data.list[0].main.temp + 
                 "</h3><h3>Humidity: " + data.list[0].main.humidity + "</h3><h3>Wind Speed: " 
-                + data.list[0].wind.speed + "</h3>";
+                + data.list[0].wind.speed + "</h3><h3>" + data.current.uvi + "</h3>";
 
                 console.log("Temp:", data.list[0].main.temp,
                 "Humidity:", data.list[0].main.humidity,
@@ -47,10 +47,15 @@ function getApi(requestUrl) {
                 lat = data.city.coord.lat;
                 lon = data.city.coord.lon;
 
-                var fiveDaysUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + userSearch + "&cnt=5&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
+                var fiveDaysUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + 
+                lat + "&lon=" + lon + "&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
 
                 fetch(fiveDaysUrl).then((res2) => {
                     console.log("weatherContainerEl", res2);
+                    res2.json().then(function (data) {
+                        console.log(data);
+                        
+                    })
                 })
                 displayReport(data);
             });
