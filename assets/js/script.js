@@ -38,8 +38,9 @@ function getApi(requestUrl) {
                 data.list[0].weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'><h3>Date: " 
                 + data.list[0].dt_txt + "</h3><h3>Temp: " + data.list[0].main.temp + 
                 "</h3><h3>Humidity: " + data.list[0].main.humidity + "</h3><h3>Wind Speed: " 
-                + data.list[0].wind.speed + "</h3><h3>" + data.current.uvi + "</h3>";
-
+                + data.list[0].wind.speed + "</h3>";
+                weatherContainerEl.innerHTML = "<h3>" + data.current.uvi + "</h3"; 
+                
                 console.log("Temp:", data.list[0].main.temp,
                 "Humidity:", data.list[0].main.humidity,
                 "Wind speed:", data.list[0].wind.speed);
@@ -54,7 +55,7 @@ function getApi(requestUrl) {
                     console.log("weatherContainerEl", res2);
                     res2.json().then(function (data) {
                         console.log(data);
-                        
+                       
                     })
                 })
                 displayReport(data);
@@ -94,7 +95,7 @@ function getApi(requestUrl) {
 
 cityFormEl.addEventListener('submit', formSubmitHandler);
 
-
+{/* <h3>" + data.current.uvi + "</h3> */}
 // ============================================
 // function getApi(requestUrl) {
 //     fetch(requestUrl)
