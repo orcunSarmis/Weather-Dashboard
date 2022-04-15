@@ -1,9 +1,8 @@
 var searchBtn = document.getElementById("searchBtn");
 var requestUrl = "https://api.openweathermap.org/data/2.5/forecast?&q=city&cnt=5&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
-var responseText = document.getElementById("response-text");
+
 var cityFormEl = document.querySelector('#city-form');
 var userInputEl = document.querySelector('#userSearch');
-var repoSearchTerm = document.querySelector('#repo-search-term');
 var weatherContainerEl = document.querySelector('#weather-container');
 var reportSearchTerm = document.querySelector('#report-search-term');
 var cardHeaderEl = document.querySelector("#cardHead");
@@ -31,7 +30,10 @@ function getApi(requestUrl) {
         if (response.ok){
             response.json().then(function (data) {
                 console.log(data);
-                weatherContainerEl.innerHTML = "<h1>" + data.city.name + "</h1><h3>Temp: " + data.list[0].main.temp + "</h3><h3>Humidity: " + data.list[0].main.humidity + "</h3><h3>Wind Speed: " + data.list[0].wind.speed + "</h3>";
+                weatherContainerEl.innerHTML = "<h1>" + data.city.name + "</h1><img>" + data.list[0].weather[0].icon + "</img><h3>Date: " 
+                + data.list[0].dt_txt + "</h3><h3>Temp: " + data.list[0].main.temp + 
+                "</h3><h3>Humidity: " + data.list[0].main.humidity + "</h3><h3>Wind Speed: " 
+                + data.list[0].wind.speed + "</h3>";
 
                 console.log("Temp:", data.list[0].main.temp,
                 "Humidity:", data.list[0].main.humidity,
@@ -78,7 +80,8 @@ function getApi(requestUrl) {
 cityFormEl.addEventListener('submit', formSubmitHandler);
 
 
-
+// var repoSearchTerm = document.querySelector('#repo-search-term');
+// var responseText = document.getElementById("response-text");
 // &daily.humidity&daily.uvi&daily.wind_speed
 // &daily.humidity&daily.uvi&daily.wind_speed
 
