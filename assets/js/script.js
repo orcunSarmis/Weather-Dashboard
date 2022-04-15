@@ -1,6 +1,6 @@
 var searchBtn = document.getElementById("searchBtn");
-var requestUrl = "https://api.openweathermap.org/data/2.5/onecall?q=city&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
-
+var requestUrl = "https://api.openweathermap.org/data/2.5/forecast?&q=city&cnt=5&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
+var fiveDaysUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + userSearch + "&cnt=5&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
 var cityFormEl = document.querySelector('#city-form');
 var userInputEl = document.querySelector('#userSearch');
 var weatherContainerEl = document.querySelector('#weather-container');
@@ -13,7 +13,7 @@ var formSubmitHandler = function (event) {
     var userSearch = userInputEl.value.trim();
   
     if (userSearch) {
-      getApi("https://api.openweathermap.org/data/2.5/onecall?q=" + userSearch + "&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial");
+        getApi("https://api.openweathermap.org/data/2.5/forecast?q=" + userSearch + "&cnt=5&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial");
         
     //   cardHeaderEl.textContent = '';
       weatherContainerEl.textContent = '';
@@ -25,8 +25,10 @@ var formSubmitHandler = function (event) {
 
 
 function getApi(requestUrl) {
+    let lat, lon;
+
     fetch(requestUrl)
-    .then(function (response) {
+    .then(function (response)  {
         if (response.ok){
             response.json().then(function (data) {
                 console.log(data);
@@ -38,15 +40,20 @@ function getApi(requestUrl) {
 
                 console.log("Temp:", data.list[0].main.temp,
                 "Humidity:", data.list[0].main.humidity,
-                "Wind speed:", data.list[0].wind.speed
-                );
+                "Wind speed:", data.list[0].wind.speed);
+
+                lat = res2.data.city.coord.lat;
+                lon = res2.data.city.coord.lon;
+                
+                fetch(fiveDaysUrl).then((res2) => {
+                    console.log("weatherContainerEl", res2);
+                })
                 displayReport(data);
             });
         }else {
             alert("error: " + response.statusText);
         }
-    })
-        .catch(function (error) {
+    }).catch(function (error) {
             alert("UPPPSSS");
         });
         // console.log(response);
