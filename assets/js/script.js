@@ -90,24 +90,34 @@ function getApi(requestUrl) {
 
     // 
     var displayReport = function (searchTerm) {
-        console.log(searchTerm.list[0].weather[0].description);
-        if (daily.length === 0) {
-        weatherContainerEl.textContent = "No Report Found.";
-        return;
-        }  
+        console.log(searchTerm);
+        // if (data.daily.length === 0) {
+        // weatherContainerEl.textContent = "No Report Found.";
+        // return;
+        // }  
 
-        reportSearchTerm.textContent = searchTerm;
+        // reportSearchTerm.textContent = searchTerm;
 
-        for (var i = 0; i < daily.length; index++) {
-            var report = data.daily[i].;
+        for (var i = 0; i < 5; i++) {
+
+            var titleEl = document.createElement("p");
+            titleEl.textContent = searchTerm.list[i].dt;
+            console.log(searchTerm);
+
+            var tempEl = document.createElement("p");
+            tempEl.textContent = searchTerm.list[i].main.temp;
+            console.log(searchTerm);
+
+            // var report = data.daily[i].;
            
             var reportEl = document.createElement("div");
             reportEl.classList =  'list-item flex-row justify-space-between align-center';
 
             // 
-            reportEl.appendChild();
+            reportEl.appendChild(titleEl);
+            reportEl.appendChild(tempEl);
             // 
-            weatherContainerEl.appendChild(reportEl);
+            fiveDaysReport.appendChild(reportEl);
         }
         
     };
