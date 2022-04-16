@@ -66,7 +66,8 @@ function getApi(requestUrl) {
 
                 var curUV = data.current.uvi;
 
-                weatherContainerEl.innerHTML = "<h1>" + cityName + "(" + curDate + ")" + curImg + "</h1><h3>Temp: "
+                weatherContainerEl.innerHTML = "<h1>" + cityName + "(" + curDate + ")" + "</h1><img src=http://openweathermap.org/img/w/" 
+                + data.current.weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'><h3>Temp: "
                 + curTemp + "</h3><h3>Wind Speed: " + curWind + "</h3><h3>Humidity: " + curHumid + "</h3><h3>UV Index: " + curUV + "</h3";
 
 
