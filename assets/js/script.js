@@ -1,6 +1,6 @@
 // These lines calling the html elements and url, store in variables.
 var searchBtn = document.getElementById("searchBtn");
-var requestUrl = "https://api.openweathermap.org/data/2.5/forecast?&q=city&cnt=5&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
+var requestUrl = "https://api.openweathermap.org/data/2.5/forecast?&q=city&cnt=6&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
 
 var cityFormEl = document.querySelector('#city-form');
 var userInputEl = document.querySelector('#userSearch');
@@ -17,7 +17,7 @@ var formSubmitHandler = function (event) {
     userSearch = userInputEl.value.trim();
   
     if (userSearch) {
-        getApi("https://api.openweathermap.org/data/2.5/forecast?q=" + userSearch + "&cnt=5&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial");
+        getApi("https://api.openweathermap.org/data/2.5/forecast?q=" + userSearch + "&cnt=6&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial");
         
     //   cardHeaderEl.textContent = '';
       weatherContainerEl.textContent = '';
@@ -36,13 +36,7 @@ function getApi(requestUrl) {
         if (response.ok){
             response.json().then(function (data) {
                 console.log(data);
-
-                // weatherContainerEl.innerHTML = "<h1>" + data.city.name + "</h1><img src=http://openweathermap.org/img/w/" + 
-                // data.list[0].weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'><h3>Date: " 
-                // + data.list[0].dt_txt + "</h3><h3>Temp: " + data.list[0].main.temp + 
-                // "</h3><h3>Humidity: " + data.list[0].main.humidity + "</h3><h3>Wind Speed: " 
-                // + data.list[0].wind.speed + "</h3>";
-                
+               
                 // These lines for declare data from api in variable.
                 let cityName = data.city.name;
                 // let curDate = data.list[0].dt_txt;
@@ -59,7 +53,7 @@ function getApi(requestUrl) {
                 lon = data.city.coord.lon;
 
                 // Second fetch URL.
-                var fiveDaysUrl = "https://api.openweathermap.org/data/2.5/onecall?cnt=5&lat=" + 
+                var fiveDaysUrl = "https://api.openweathermap.org/data/2.5/onecall?cnt=6&lat=" + 
                 lat + "&lon=" + lon + "&exclude=minutely,hourly&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
 
     // These lines second api call for pick up UV index.
@@ -80,10 +74,10 @@ function getApi(requestUrl) {
                 // Add user input city name in local storage.
                 localStorage.setItem("city", cityName);
                 
-                // 
-                var memory = document.getElementById("cityStore").textContent = city.value;
+                // This line call back city name from local storage.
+                // var memory = document.getElementById("cityStore").textContent = city.value;
 
-                memory.appendChild(city);
+                // memory.appendChild(city);
                     })
                 })
                 displayReport(data);
@@ -109,7 +103,7 @@ function getApi(requestUrl) {
         // reportSearchTerm.textContent = searchTerm;
 
         // for loop code for display five days datas in the cards.
-        for (var i = 1; i < 5; i++) {
+        for (var i = 1; i < 6; i++) {
 
             // These lines display main date, with moment format the date.
             var titleEl = document.createElement("p");
@@ -354,3 +348,12 @@ cityFormEl.addEventListener('submit', formSubmitHandler);
 //    };
 //     // this line is input eventlistner.
 //     cityFormEl.addEventListener('submit', formSubmitHandler);
+
+// =================================================================================================================================================
+
+// ***************************************************************************************
+                // weatherContainerEl.innerHTML = "<h1>" + data.city.name + "</h1><img src=http://openweathermap.org/img/w/" + 
+                // data.list[0].weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'><h3>Date: " 
+                // + data.list[0].dt_txt + "</h3><h3>Temp: " + data.list[0].main.temp + 
+                // "</h3><h3>Humidity: " + data.list[0].main.humidity + "</h3><h3>Wind Speed: " 
+                // + data.list[0].wind.speed + "</h3>";
