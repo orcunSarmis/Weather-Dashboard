@@ -34,13 +34,20 @@ function getApi(requestUrl) {
         if (response.ok){
             response.json().then(function (data) {
                 console.log(data);
-                weatherContainerEl.innerHTML = "<h1>" + data.city.name + "</h1><img src=http://openweathermap.org/img/w/" + 
-                data.list[0].weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'><h3>Date: " 
-                + data.list[0].dt_txt + "</h3><h3>Temp: " + data.list[0].main.temp + 
-                "</h3><h3>Humidity: " + data.list[0].main.humidity + "</h3><h3>Wind Speed: " 
-                + data.list[0].wind.speed + "</h3>";
-                weatherContainerEl.innerHTML = "<h3>" + data.current.uvi + "</h3"; 
+
+                // weatherContainerEl.innerHTML = "<h1>" + data.city.name + "</h1><img src=http://openweathermap.org/img/w/" + 
+                // data.list[0].weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'><h3>Date: " 
+                // + data.list[0].dt_txt + "</h3><h3>Temp: " + data.list[0].main.temp + 
+                // "</h3><h3>Humidity: " + data.list[0].main.humidity + "</h3><h3>Wind Speed: " 
+                // + data.list[0].wind.speed + "</h3>";
                 
+                let cityName = data.city.name;
+                let curDate = data.list[0].dt_txt;
+                let curImg = "src=http://openweathermap.org/img/w/" + data.list[0].weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'";
+                let curTemp = data.list[0].main.temp;
+                let curWind = data.list[0].wind.speed;
+                let curHumid = data.list[0].main.humidity;
+
                 console.log("Temp:", data.list[0].main.temp,
                 "Humidity:", data.list[0].main.humidity,
                 "Wind speed:", data.list[0].wind.speed);
@@ -51,11 +58,18 @@ function getApi(requestUrl) {
                 var fiveDaysUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + 
                 lat + "&lon=" + lon + "&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
 
-                fetch(fiveDaysUrl).then((res2) => {
-                    console.log("weatherContainerEl", res2);
-                    res2.json().then(function (data) {
-                        console.log(data);
-                       
+    fetch(fiveDaysUrl)
+    .then((res2) => {
+                console.log("weatherContainerEl", res2);
+                res2.json().then(function (data) {
+                console.log(data);
+
+                var curUV = data.current.uvi;
+
+                weatherContainerEl.innerHTML = "<h1>" + cityName + "(" + curDate + ")" + curImg + "</h1><h3>Temp: "
+                + curTemp + "</h3><h3>Wind Speed: " + curWind + "</h3><h3>Humidity: " + curHumid + "</h3><h3>UV Index: " + curUV + "</h3";
+
+
                     })
                 })
                 displayReport(data);
