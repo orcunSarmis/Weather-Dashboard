@@ -1,3 +1,4 @@
+// These lines calling the html elements and url, store in variables.
 var searchBtn = document.getElementById("searchBtn");
 var requestUrl = "https://api.openweathermap.org/data/2.5/forecast?&q=city&cnt=5&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
 
@@ -6,6 +7,7 @@ var userInputEl = document.querySelector('#userSearch');
 var weatherContainerEl = document.querySelector('#weather-container');
 var reportSearchTerm = document.querySelector('#report-search-term');
 var cardHeaderEl = document.querySelector("#cardHead");
+var fiveDaysReport = document.querySelector("#five-days-report");
 var curDate = moment().format("MM/DD/YYYY");
 var userSearch = "";
 
@@ -55,22 +57,22 @@ function getApi(requestUrl) {
                 lat = data.city.coord.lat;
                 lon = data.city.coord.lon;
 
-                var fiveDaysUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + 
+                var fiveDaysUrl = "https://api.openweathermap.org/data/2.5/onecall?cnt=5&lat=" + 
                 lat + "&lon=" + lon + "&exclude=minutely,hourly&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
-
+    // These lines second api call for pick up UV index.
     fetch(fiveDaysUrl)
     .then((res2) => {
                 console.log("weatherContainerEl", res2);
                 res2.json().then(function (data) {
                 console.log(data);
 
+                // Declasre UV index in variable.
                 var curUV = data.current.uvi;
 
+                // These lines display all data in main card.
                 weatherContainerEl.innerHTML = "<h1>" + cityName + " (" + curDate + ") </h1><img src=http://openweathermap.org/img/w/" 
                 + data.current.weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'><h3>Temp: "
                 + curTemp + "</h3><h3>Wind Speed: " + curWind + "</h3><h3>Humidity: " + curHumid + "</h3><h3>UV Index: " + curUV + "</h3";
-
-
                     })
                 })
                 displayReport(data);
@@ -78,6 +80,7 @@ function getApi(requestUrl) {
         }else {
             alert("error: " + response.statusText);
         }
+    // This lines catching the error and display alert note. 
     }).catch(function (error) {
             alert("UPPPSSS");
         });
@@ -85,6 +88,7 @@ function getApi(requestUrl) {
         // return response.json();       
     };
 
+    // 
     var displayReport = function (searchTerm) {
         console.log(searchTerm.list[0].weather[0].description);
         if (daily.length === 0) {
@@ -95,7 +99,7 @@ function getApi(requestUrl) {
         reportSearchTerm.textContent = searchTerm;
 
         for (var i = 0; i < daily.length; index++) {
-            var report = daily[i];
+            var report = data.daily[i].;
            
             var reportEl = document.createElement("div");
             reportEl.classList =  'list-item flex-row justify-space-between align-center';
@@ -110,7 +114,9 @@ function getApi(requestUrl) {
 
 cityFormEl.addEventListener('submit', formSubmitHandler);
 
-{/* <h3>" + data.current.uvi + "</h3> */}
+
+
+/* <h3>" + data.current.uvi + "</h3> */
 // ============================================
 // function getApi(requestUrl) {
 //     fetch(requestUrl)
@@ -154,10 +160,8 @@ cityFormEl.addEventListener('submit', formSubmitHandler);
 
 
 
-    // .then(function (data) {
-    //     console.log(data);
+
         
     // })
 // getApi(requestUrl);
 
-// responseText.textContent = response.data;
