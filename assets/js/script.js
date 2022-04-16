@@ -100,12 +100,24 @@ function getApi(requestUrl) {
 
         for (var i = 0; i < 5; i++) {
 
+            // These lines display main date.
             var titleEl = document.createElement("p");
             titleEl.textContent = searchTerm.list[i].dt;
             console.log(searchTerm);
 
+            // These lines display main temprature.
             var tempEl = document.createElement("p");
             tempEl.textContent = searchTerm.list[i].main.temp;
+            console.log(searchTerm);
+
+            // These lines display main wind.
+            var windEl = document.createElement("p");
+            windEl.textContent = searchTerm.list[i].wind.speed;
+            console.log(searchTerm);
+
+            // These lines display main humidity.
+            var humidEl = document.createElement("p");
+            humidEl.textContent = searchTerm.list[i].main.humidity;
             console.log(searchTerm);
 
             // var report = data.daily[i].;
@@ -116,6 +128,9 @@ function getApi(requestUrl) {
             // 
             reportEl.appendChild(titleEl);
             reportEl.appendChild(tempEl);
+            reportEl.appendChild(windEl);
+            reportEl.appendChild(humidEl);
+
             // 
             fiveDaysReport.appendChild(reportEl);
         }
