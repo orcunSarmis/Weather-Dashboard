@@ -6,7 +6,7 @@ var userInputEl = document.querySelector('#userSearch');
 var weatherContainerEl = document.querySelector('#weather-container');
 var reportSearchTerm = document.querySelector('#report-search-term');
 var cardHeaderEl = document.querySelector("#cardHead");
-
+var curDate = moment().format("MM/DD/YYYY");
 var userSearch = "";
 
 var formSubmitHandler = function (event) {
@@ -42,7 +42,7 @@ function getApi(requestUrl) {
                 // + data.list[0].wind.speed + "</h3>";
                 
                 let cityName = data.city.name;
-                let curDate = data.list[0].dt_txt;
+                // let curDate = data.list[0].dt_txt;
                 let curImg = "src=http://openweathermap.org/img/w/" + data.list[0].weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'";
                 let curTemp = data.list[0].main.temp;
                 let curWind = data.list[0].wind.speed;
