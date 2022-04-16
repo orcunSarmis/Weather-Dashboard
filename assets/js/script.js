@@ -98,32 +98,32 @@ function getApi(requestUrl) {
 
         // reportSearchTerm.textContent = searchTerm;
 
-        for (var i = 0; i < 5; i++) {
+        for (var i = 1; i < 5; i++) {
 
-            // These lines display main date.
+            // These lines display main date, with moment format the date.
             var titleEl = document.createElement("p");
-            titleEl.textContent = searchTerm.list[i].dt;
+            titleEl.textContent = moment.unix(searchTerm.list[i].dt).format("MM/DD/YYYY");
             console.log(searchTerm);
 
             // These lines display main temprature.
             var tempEl = document.createElement("p");
-            tempEl.textContent = searchTerm.list[i].main.temp;
+            tempEl.textContent = "Temp: " + searchTerm.list[i].main.temp;
             console.log(searchTerm);
 
             // These lines display main wind.
             var windEl = document.createElement("p");
-            windEl.textContent = searchTerm.list[i].wind.speed;
+            windEl.textContent = "Wind: " + searchTerm.list[i].wind.speed;
             console.log(searchTerm);
 
             // These lines display main humidity.
             var humidEl = document.createElement("p");
-            humidEl.textContent = searchTerm.list[i].main.humidity;
+            humidEl.textContent = "Humidity: " + searchTerm.list[i].main.humidity;
             console.log(searchTerm);
 
             // var report = data.daily[i].;
            
             var reportEl = document.createElement("div");
-            reportEl.classList =  'list-item flex-row justify-space-between align-center';
+            reportEl.classList =  'list-item justify-space-between align-center';
 
             // 
             reportEl.appendChild(titleEl);
