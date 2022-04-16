@@ -43,7 +43,7 @@ function getApi(requestUrl) {
                 
                 let cityName = data.city.name;
                 // let curDate = data.list[0].dt_txt;
-                let curImg = "src=http://openweathermap.org/img/w/" + data.list[0].weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'";
+                // let curImg = "src=http://openweathermap.org/img/w/" + data.list[0].weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'";
                 let curTemp = data.list[0].main.temp;
                 let curWind = data.list[0].wind.speed;
                 let curHumid = data.list[0].main.humidity;
@@ -56,7 +56,7 @@ function getApi(requestUrl) {
                 lon = data.city.coord.lon;
 
                 var fiveDaysUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + 
-                lat + "&lon=" + lon + "&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
+                lat + "&lon=" + lon + "&exclude=minutely,hourly&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
 
     fetch(fiveDaysUrl)
     .then((res2) => {
@@ -66,7 +66,7 @@ function getApi(requestUrl) {
 
                 var curUV = data.current.uvi;
 
-                weatherContainerEl.innerHTML = "<h1>" + cityName + "(" + curDate + ")" + "</h1><img src=http://openweathermap.org/img/w/" 
+                weatherContainerEl.innerHTML = "<h1>" + cityName + " (" + curDate + ") </h1><img src=http://openweathermap.org/img/w/" 
                 + data.current.weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'><h3>Temp: "
                 + curTemp + "</h3><h3>Wind Speed: " + curWind + "</h3><h3>Humidity: " + curHumid + "</h3><h3>UV Index: " + curUV + "</h3";
 
