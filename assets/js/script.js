@@ -72,8 +72,14 @@ function getApi(requestUrl) {
                 + curTemp + "</h3><h3>Wind Speed: " + curWind + "</h3><h3>Humidity: " + curHumid + "</h3><h3>UV Index: " + curUV + "</h3>";
 
                 // Add user input city name in local storage.
-                localStorage.setItem("city", json.stringify({cityName}));
-                
+                localStorage.setItem("city", JSON.stringify({cityName}));
+                var city = localStorage.getItem("cityName");
+
+                searchBtn.addEventListener('click', () => {
+                    city.push(userInputEl.value);
+                    userInputEl.value= '';
+                    console.log( value);
+                })
                 // This line call back city name from local storage.
                 // var memory = document.getElementById("cityStore").textContent = city.value;
                 displayReport(data);
