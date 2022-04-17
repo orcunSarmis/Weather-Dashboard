@@ -137,7 +137,6 @@
     border-radius: var(--border-radius);
   }
   
-  
   /* CARDS */
   .card {
     margin: 0 0 20px 0;
@@ -186,14 +185,6 @@
     display: flex;
     justify-content: space-evenly;
   }
-  /* HEIGHT / WIDTH UTILS */
-  /* .min-100-vh {
-    min-height: 100vh;
-  }
-  
-  .min-100-vw {
-    min-width: 100vw;
-  } */
   
   /* FONT UTILS */
   .text-uppercase {
@@ -213,9 +204,6 @@
   }
   
 
-  
-
- 
   
   /* col-sm */
   @media screen and (min-width: 640px) {
