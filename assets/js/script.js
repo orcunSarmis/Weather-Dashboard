@@ -72,7 +72,7 @@ function getApi(requestUrl) {
                 + curTemp + "</h3><h3>Wind Speed: " + curWind + "</h3><h3>Humidity: " + curHumid + "</h3><h3>UV Index: " + curUV + "</h3>";
 
                 // Add user input city name in local storage.
-                localStorage.setItem("city", cityName);
+                localStorage.setItem("city", json.stringify({cityName}));
                 
                 // This line call back city name from local storage.
                 // var memory = document.getElementById("cityStore").textContent = city.value;
@@ -110,20 +110,11 @@ function getApi(requestUrl) {
             titleEl.textContent = moment.unix(searchTerm.daily[i].dt).format("MM/DD/YYYY");
             // console.log(searchTerm);
 
+            // These lines create img tag in html and set icon in variable, with its path.
             var iconEl = document.createElement("img");
-
             var iconSrcAttr = 'http://openweathermap.org/img/w/'+ searchTerm.daily[i].weather[0].icon + '.png';
-
             iconEl.setAttribute('src', iconSrcAttr);
             
-
-
-          // iconEl.textContent = searchTerm."<img src=http://openweathermap.org/img/w/" 
-            // + data.current.weather[i].icon + ".png alt='Icon depicting current weather' width='50' height='50'>;
-
-            // <img src=http://openweathermap.org/img/w/" 
-            //     + data.current.weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'>
-
             // These lines display main temprature.
             var tempEl = document.createElement("p");
             tempEl.textContent = "Temp: " + searchTerm.daily[i].temp.day;
@@ -145,15 +136,14 @@ function getApi(requestUrl) {
 
             // These are data implementation to html.
             reportEl.appendChild(titleEl);
+            reportEl.appendChild(iconEl);
             reportEl.appendChild(tempEl);
             reportEl.appendChild(windEl);
             reportEl.appendChild(humidEl);
-            reportEl.appendChild(iconEl);
-
-            // 
+            
+            // These lines set five days data in html.
             fiveDaysReport.appendChild(reportEl);
-        }
-        
+        }       
     };
 
 cityFormEl.addEventListener('submit', formSubmitHandler);
@@ -368,3 +358,10 @@ cityFormEl.addEventListener('submit', formSubmitHandler);
                 // + data.list[0].dt_txt + "</h3><h3>Temp: " + data.list[0].main.temp + 
                 // "</h3><h3>Humidity: " + data.list[0].main.humidity + "</h3><h3>Wind Speed: " 
                 // + data.list[0].wind.speed + "</h3>";
+
+
+                          // iconEl.textContent = searchTerm."<img src=http://openweathermap.org/img/w/" 
+            // + data.current.weather[i].icon + ".png alt='Icon depicting current weather' width='50' height='50'>;
+
+            // <img src=http://openweathermap.org/img/w/" 
+            //     + data.current.weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'>
