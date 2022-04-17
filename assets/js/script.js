@@ -76,11 +76,11 @@ function getApi(requestUrl) {
                 
                 // This line call back city name from local storage.
                 // var memory = document.getElementById("cityStore").textContent = city.value;
-
+                displayReport(data);
                 // memory.appendChild(city);
                     })
                 })
-                displayReport(data);
+               
             });
         }else {
             alert("error: " + response.statusText);
@@ -107,7 +107,7 @@ function getApi(requestUrl) {
 
             // These lines display main date, with moment format the date.
             var titleEl = document.createElement("p");
-            titleEl.textContent = moment.unix(searchTerm.list[i].dt).format("MM/DD/YYYY");
+            titleEl.textContent = moment.unix(searchTerm.daily[i].dt).format("MM/DD/YYYY");
             console.log(searchTerm);
 
             // var iconEl = document.createElement("img");
@@ -116,17 +116,17 @@ function getApi(requestUrl) {
 
             // These lines display main temprature.
             var tempEl = document.createElement("p");
-            tempEl.textContent = "Temp: " + searchTerm.list[i].main.temp;
+            tempEl.textContent = "Temp: " + searchTerm.daily[i].temp.day;
             console.log(searchTerm);
 
             // These lines display main wind.
             var windEl = document.createElement("p");
-            windEl.textContent = "Wind: " + searchTerm.list[i].wind.speed;
+            windEl.textContent = "Wind: " + searchTerm.daily[i].wind_speed;
             console.log(searchTerm);
 
             // These lines display main humidity.
             var humidEl = document.createElement("p");
-            humidEl.textContent = "Humidity: " + searchTerm.list[i].main.humidity;
+            humidEl.textContent = "Humidity: " + searchTerm.daily[i].humidity;
             console.log(searchTerm);
 
             // These lines for create div element and display data from api.   
