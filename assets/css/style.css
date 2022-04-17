@@ -120,6 +120,7 @@
   .list-item {
     margin-bottom: 10px;
     padding: 1.5%;
+    margin-right: 10px;
     border-radius: var(--border-radius);
     background-color: var(--light-dark);
     color: var(--primary);
@@ -137,13 +138,6 @@
     border-radius: var(--border-radius);
   }
   
-  .icon-danger {
-    color: rgb(255, 70, 70);
-  }
-  
-  .icon-success {
-    color: rgb(29, 153, 255);
-  }
   
   /* CARDS */
   .card {
@@ -184,14 +178,23 @@
     border-radius: var(--border-radius);
   }
   
+  .weather-container {
+    padding: 15px;
+
+  }
+
+  .future-forecast {
+    display: flex;
+    justify-content: space-evenly;
+  }
   /* HEIGHT / WIDTH UTILS */
-  .min-100-vh {
+  /* .min-100-vh {
     min-height: 100vh;
   }
   
   .min-100-vw {
     min-width: 100vw;
-  }
+  } */
   
   /* FONT UTILS */
   .text-uppercase {

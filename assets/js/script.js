@@ -35,7 +35,7 @@ function getApi(requestUrl) {
     .then(function (response)  {
         if (response.ok){
             response.json().then(function (data) {
-                console.log(data);
+                // console.log(data);
                
                 // These lines for declare data from api in variable.
                 let cityName = data.city.name;
@@ -45,9 +45,9 @@ function getApi(requestUrl) {
                 let curWind = data.list[0].wind.speed;
                 let curHumid = data.list[0].main.humidity;
 
-                console.log("Temp:", data.list[0].main.temp,
-                "Humidity:", data.list[0].main.humidity,
-                "Wind speed:", data.list[0].wind.speed);
+                // // console.log("Temp:", data.list[0].main.temp,
+                // "Humidity:", data.list[0].main.humidity,
+                // "Wind speed:", data.list[0].wind.speed);
 
                 lat = data.city.coord.lat;
                 lon = data.city.coord.lon;
@@ -59,9 +59,9 @@ function getApi(requestUrl) {
     // These lines second api call for pick up UV index.
     fetch(fiveDaysUrl)
     .then((res2) => {
-                console.log("weatherContainerEl", res2);
+                // console.log("weatherContainerEl", res2);
                 res2.json().then(function (data) {
-                console.log(data);
+                // console.log(data);
 
                 // This line declare UV index in variable.
                 var curUV = data.current.uvi;
@@ -69,7 +69,7 @@ function getApi(requestUrl) {
                 // These lines display all data in main card.
                 weatherContainerEl.innerHTML = "<h1>" + cityName + " (" + curDate + ") </h1><img src=http://openweathermap.org/img/w/" 
                 + data.current.weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'><h3>Temp: "
-                + curTemp + "</h3><h3>Wind Speed: " + curWind + "</h3><h3>Humidity: " + curHumid + "</h3><h3>UV Index: " + curUV + "</h3";
+                + curTemp + "</h3><h3>Wind Speed: " + curWind + "</h3><h3>Humidity: " + curHumid + "</h3><h3>UV Index: " + curUV + "</h3>";
 
                 // Add user input city name in local storage.
                 localStorage.setItem("city", cityName);
@@ -95,7 +95,7 @@ function getApi(requestUrl) {
 
     // Function that display data from api.
     var displayReport = function (searchTerm) {
-        console.log(searchTerm);
+        // console.log(searchTerm);
         // if (data.daily.length === 0) {
         // weatherContainerEl.textContent = "No Report Found.";
         // return;
@@ -108,36 +108,47 @@ function getApi(requestUrl) {
             // These lines display main date, with moment format the date.
             var titleEl = document.createElement("p");
             titleEl.textContent = moment.unix(searchTerm.daily[i].dt).format("MM/DD/YYYY");
-            console.log(searchTerm);
+            // console.log(searchTerm);
 
-            // var iconEl = document.createElement("img");
-            // iconEl.textContent = searchTerm."<img src=http://openweathermap.org/img/w/" 
+            var iconEl = document.createElement("img");
+
+            var iconSrcAttr = 'http://openweathermap.org/img/w/'+ searchTerm.daily[i].weather[0].icon + '.png';
+
+            iconEl.setAttribute('src', iconSrcAttr);
+            
+
+
+          // iconEl.textContent = searchTerm."<img src=http://openweathermap.org/img/w/" 
             // + data.current.weather[i].icon + ".png alt='Icon depicting current weather' width='50' height='50'>;
+
+            // <img src=http://openweathermap.org/img/w/" 
+            //     + data.current.weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'>
 
             // These lines display main temprature.
             var tempEl = document.createElement("p");
             tempEl.textContent = "Temp: " + searchTerm.daily[i].temp.day;
-            console.log(searchTerm);
+            // console.log(searchTerm);
 
             // These lines display main wind.
             var windEl = document.createElement("p");
             windEl.textContent = "Wind: " + searchTerm.daily[i].wind_speed;
-            console.log(searchTerm);
+            // console.log(searchTerm);
 
             // These lines display main humidity.
             var humidEl = document.createElement("p");
             humidEl.textContent = "Humidity: " + searchTerm.daily[i].humidity;
-            console.log(searchTerm);
+            // console.log(searchTerm);
 
             // These lines for create div element and display data from api.   
             var reportEl = document.createElement("div");
-            reportEl.classList =  'list-item justify-space-between align-center';
+            reportEl.classList =  'list-item justify-space-between ';
 
             // These are data implementation to html.
             reportEl.appendChild(titleEl);
             reportEl.appendChild(tempEl);
             reportEl.appendChild(windEl);
             reportEl.appendChild(humidEl);
+            reportEl.appendChild(iconEl);
 
             // 
             fiveDaysReport.appendChild(reportEl);

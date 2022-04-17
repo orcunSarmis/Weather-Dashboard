@@ -21,45 +21,37 @@
     <title>Weather Dashboard</title>
 </head>
 
-<body class="flex-column min-100-vh">
+<body >
     <header class="hero">
       <h1 class="app-title">
          Weather Dashboard
       </h1>
     </header>
     <!-- col-12 col-md-4 -->
-     <main class="flex-row justify-space-between">
+    <main class="flex-row justify-space-between">
       <div class="w-25">
-        <div class="card">
-          <h3 class="card-header text-uppercase">Search for a city</h3>
-          <form id="city-form" class="card-body">
-            <input name="userinput" id="userSearch" type="text" autofocus="true" class="form-input" placeholder="city"/>
-            <button id="searchBtn" type="submit" class="btn">Search</button>
-          </form>
+          <div class="card">
+            <h3 class="card-header text-uppercase">Search for a city</h3>
+            <form id="city-form" class="card-body">
+              <input name="userinput" id="userSearch" type="text" autofocus="true" class="form-input" placeholder="city"/>
+              <button id="searchBtn" type="submit" class="btn">Search</button>
+            </form>
+          </div>
           <div class="card border-dark">
             <div id="cityStore" class="showCity"></div>
           </div>
         </div>
-      </div>
-      <!--  --> 
-      <!-- style="max-width: 18rem;" -->
-      <div class="card border-dark w-75 mb-3"   class="col-12 col-md-8">
-        <div id="weather-container" class="list-group">
+        <!--  --> 
+        <!-- style="max-width: 18rem;" -->
+        <div class="card border-dark w-75 mb-3"   >
+          <div id="weather-container" class="list-group">
+          </div>
+          <div class="card border-dark weather-container"   >
+            <div id="five-days-report" class="future-forecast">
+            </div>
+          </div>
         </div>
-      </div>
-      
-      <div class="card border-dark justify-content-end"  class="col-12 col-md-8">
-        <div id="five-days-report" class="5-days-report">
-        </div>
-      </div>
-
-
- 
-       <!-- <div class="col-12 col-md-8">
-        <div id="weather-container" class="list-group"></div>
-     </div> -->
-    </div>
-     </main>  
+    </main>  
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
@@ -70,6 +62,10 @@
 </html>
 
 
+
+       <!-- <div class="col-12 col-md-8">
+        <div id="weather-container" class="list-group"></div>
+     </div> -->
 <!-- <div class="header">
   <h1>Weather Dashboard</h1>     
 </div> -->
