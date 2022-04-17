@@ -71,12 +71,12 @@ function getApi(requestUrl) {
                 + data.current.weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'><h3>Temp: "
                 + curTemp + "</h3><h3>Wind Speed: " + curWind + "</h3><h3>Humidity: " + curHumid + "</h3><h3>UV Index: " + curUV + "</h3>";
 
-                // Add user input city name in local storage.
+                // Add user input cities name in local storage.
                 var allcities = JSON.parse(localStorage.getItem("cities")) || [];
                 allcities.push(userInputEl.value);
                 userInputEl.value = '';
-                localStorage.setItem("cities", allcities);
-                
+                localStorage.setItem("cities", JSON.stringify(allcities));
+
 
                 // localStorage.setItem("city", JSON.stringify({city}));
                 // var city = localStorage.getItem("cityName");
