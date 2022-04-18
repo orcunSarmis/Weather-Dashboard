@@ -65,18 +65,14 @@ function getApi(requestUrl) {
 
                 // Add user input cities name in local storage.
                 var allcities = JSON.parse(localStorage.getItem("cities")) || [];
-                allcities.push(userInputEl.value.trim());
+                // allcities.push(userInputEl.value.trim());
                 allcities.push(userSearch);
                 
-                // userInputEl.value = '';
-                userSearch ='';
-                localStorage.setItem("cities", JSON.stringify(allcities));
 
-                allcities.filter(element => {
-                    return element !== '';
-                });
-
-
+                // for (let i = 0; i < allcities.length; i++) {
+                //     const  = allcities[i];
+                    
+                // }
                 displayReport(data);
                 
                     })
@@ -89,9 +85,7 @@ function getApi(requestUrl) {
     // This lines catching the error and display alert note. 
     }).catch(function (error) {
             alert("UPPPSSS");
-        });
-        // console.log(response);
-        // return response.json();       
+        });     
     };
 
     // Function that display data from api.
@@ -392,3 +386,11 @@ cityFormEl.addEventListener('submit', formSubmitHandler);
 
 
                     //   cardHeaderEl.textContent = '';
+
+                                   // userInputEl.value = '';
+                // userSearch ='';
+                // localStorage.setItem("cities", JSON.stringify(allcities));
+
+                // allcities = allcities.filter(element => {
+                //     return element !== '';
+                // });
