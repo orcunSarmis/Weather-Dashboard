@@ -72,10 +72,10 @@ function getApi(requestUrl) {
                 userSearch ='';
                 localStorage.setItem("cities", JSON.stringify(allcities));
 
-                // var results = cities.filter(element => {
-                //     return element !== '';
-                // });
-                // console.log(results);
+                allcities.filter(element => {
+                    return element !== '';
+                });
+
 
                 displayReport(data);
                 
