@@ -116,6 +116,8 @@ function getApi(requestUrl) {
         // }  
         // reportSearchTerm.textContent = searchTerm;
 
+        fiveDaysReport.innerHTML = '';
+
         // for loop code for display five days datas in the cards.
         for (var i = 1; i < 6; i++) {
 
