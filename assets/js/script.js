@@ -77,18 +77,18 @@ function getApi(requestUrl) {
                 // allcities.push(userInputEl.value.trim());
                 allcities.push(userSearch);
                 
+                // var sameCityAgain = "https://api.openweathermap.org/data/2.5/onecall?cnt=6&lat=" + allcities + "&exclude=minutely,hourly&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
 
-                // This lines make buttons for city names in the page.
+                // This lines make buttons for city names in the page, will iterate by user search.
                 let = 1;
                 for (let i = 0; i < allcities.length; i++) {
                      let searchAgain = document.createElement("button");
                      searchAgain.innerHTML = i;
                      cityStoreEl.appendChild(searchAgain);
-                     searchAgain.addEventListener("click", function(getApi) {
+                     searchAgain.addEventListener("click", function getApi(sameCityAgain) {
                      });
-                     searchAgain.document.classList("city-btn");
-                     document.querySelector(".city-btn").textContent = "allcities";
-                    //  allcities[i];
+                     searchAgain.classList.add("city-btn");
+                     searchAgain.textContent = allcities[i];
                 }
 
                 displayReport(data);
