@@ -41,6 +41,7 @@
     font-size: 1.2rem;
   }
   
+
   .btn {
     font-size: 1.3rem;
     text-decoration: none;
@@ -130,12 +131,6 @@
     background-color: var(--dark);
   }
   
-  .status-icon {
-    padding: 2px 5px;
-    margin: 0 5px;
-    background-color: rgba(255, 255, 255, 1);
-    border-radius: var(--border-radius);
-  }
   
   /* CARDS */
   .card {

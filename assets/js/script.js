@@ -73,8 +73,11 @@ function getApi(requestUrl) {
 
                 // Add user input cities name in local storage.
                 var allcities = JSON.parse(localStorage.getItem("cities")) || [];
-                allcities.push(userInputEl.value);
-                userInputEl.value = '';
+                allcities.push(userInputEl.value.trim());
+                allcities.push(userSearch);
+                
+                // userInputEl.value = '';
+                userSearch ='';
                 localStorage.setItem("cities", JSON.stringify(allcities));
 
 
