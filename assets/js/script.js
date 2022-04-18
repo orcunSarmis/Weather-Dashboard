@@ -7,12 +7,21 @@ var weatherContainerEl = document.querySelector('#weather-container');
 var reportSearchTerm = document.querySelector('#report-search-term');
 var cardHeaderEl = document.querySelector("#cardHead");
 var fiveDaysReport = document.querySelector("#five-days-report");
+var cityStoreEl = document.querySelector("#cityStore");
 var curDate = moment().format("MM/DD/YYYY");
 var userSearch = "";
 
 // These function is main submit event handler.
 var formSubmitHandler = function (event) {
     event.preventDefault();
+
+    // These lines for hiding main card.
+    // if(show-con === inline) {
+    //     document.getElementById("show-hide").style.display = "inline";
+    // }else {
+    //     document.getElementById("show-hide").style.display = "none";
+    // }
+
 
     userSearch = userInputEl.value.trim();
   
@@ -69,10 +78,18 @@ function getApi(requestUrl) {
                 allcities.push(userSearch);
                 
 
-                // for (let i = 0; i < allcities.length; i++) {
-                //     const  = allcities[i];
-                    
-                // }
+                // This lines make buttons for city names in the page.
+                let = 1;
+                for (let i = 0; i < allcities.length; i++) {
+                     let searchAgain = document.createElement("allcities");
+                     button.innerHTML = "allcities" +i;
+                     cityStoreEl.appendChild(button);
+                     button.addEventListener("click", function() {
+
+                     });
+                    //  allcities[i];
+                }
+
                 displayReport(data);
                 
                     })
