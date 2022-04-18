@@ -92,8 +92,8 @@ function getApi(requestUrl) {
                      searchAgain.innerHTML = i;
                      cityStoreEl.appendChild(searchAgain);
                      searchAgain.addEventListener("click", function (event) {
-                         console.log(event.target.innerHTML);
-                         var sameCityAgain = "https://api.openweathermap.org/data/2.5/onecall?cnt=6&q=" + event.target.innerHTML + "&exclude=minutely,hourly&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
+                        //  console.log(event.target.innerHTML);
+                         var sameCityAgain = "https://api.openweathermap.org/data/2.5/forecast?q=" + event.target.innerHTML + "&cnt=6&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
                          getApi(sameCityAgain);
                      });
                      searchAgain.classList.add("city-btn");
