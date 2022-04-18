@@ -81,12 +81,13 @@ function getApi(requestUrl) {
                 // This lines make buttons for city names in the page.
                 let = 1;
                 for (let i = 0; i < allcities.length; i++) {
-                     let searchAgain = document.createElement("allcities");
-                     button.innerHTML = "allcities" +i;
-                     cityStoreEl.appendChild(button);
-                     button.addEventListener("click", function() {
-
+                     let searchAgain = document.createElement("button");
+                     searchAgain.innerHTML = i;
+                     cityStoreEl.appendChild(searchAgain);
+                     searchAgain.addEventListener("click", function(getApi) {
                      });
+                     searchAgain.document.classList("city-btn");
+                     document.querySelector(".city-btn").textContent = "allcities";
                     //  allcities[i];
                 }
 
