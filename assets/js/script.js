@@ -1,7 +1,6 @@
 // These lines calling the html elements and url, store in variables.
 var searchBtn = document.getElementById("searchBtn");
 var requestUrl = "https://api.openweathermap.org/data/2.5/forecast?&q=city&cnt=6&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
-
 var cityFormEl = document.querySelector('#city-form');
 var userInputEl = document.querySelector('#userSearch');
 var weatherContainerEl = document.querySelector('#weather-container');
@@ -11,15 +10,15 @@ var fiveDaysReport = document.querySelector("#five-days-report");
 var curDate = moment().format("MM/DD/YYYY");
 var userSearch = "";
 
+// These function is main submit event handler.
 var formSubmitHandler = function (event) {
     event.preventDefault();
 
     userSearch = userInputEl.value.trim();
   
+    // These lines checks get api fucntion's inputs are not empty.
     if (userSearch) {
-        getApi("https://api.openweathermap.org/data/2.5/forecast?q=" + userSearch + "&cnt=6&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial");
-        
-    //   cardHeaderEl.textContent = '';
+        getApi("https://api.openweathermap.org/data/2.5/forecast?q=" + userSearch + "&cnt=6&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial");       
       weatherContainerEl.textContent = '';
       userInputEl.value = '';
     } else {
@@ -27,10 +26,11 @@ var formSubmitHandler = function (event) {
     }
 };
 
-
+// These lines are the main functions that who contain two fetch for user search.
 function getApi(requestUrl) {
     let lat, lon;
 
+    // First api cal for City name and lat and lon datas.
     fetch(requestUrl)
     .then(function (response)  {
         if (response.ok){
@@ -39,15 +39,9 @@ function getApi(requestUrl) {
                
                 // These lines for declare data from api in variable.
                 let cityName = data.city.name;
-                // let curDate = data.list[0].dt_txt;
-                // let curImg = "src=http://openweathermap.org/img/w/" + data.list[0].weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'";
                 let curTemp = data.list[0].main.temp;
                 let curWind = data.list[0].wind.speed;
                 let curHumid = data.list[0].main.humidity;
-
-                // // console.log("Temp:", data.list[0].main.temp,
-                // "Humidity:", data.list[0].main.humidity,
-                // "Wind speed:", data.list[0].wind.speed);
 
                 lat = data.city.coord.lat;
                 lon = data.city.coord.lon;
@@ -59,9 +53,7 @@ function getApi(requestUrl) {
     // These lines second api call for pick up UV index.
     fetch(fiveDaysUrl)
     .then((res2) => {
-                // console.log("weatherContainerEl", res2);
                 res2.json().then(function (data) {
-                // console.log(data);
 
                 // This line declare UV index in variable.
                 var curUV = data.current.uvi;
@@ -80,18 +72,13 @@ function getApi(requestUrl) {
                 userSearch ='';
                 localStorage.setItem("cities", JSON.stringify(allcities));
 
+                // var results = cities.filter(element => {
+                //     return element !== '';
+                // });
+                // console.log(results);
 
-                // localStorage.setItem("city", JSON.stringify({city}));
-                // var city = localStorage.getItem("cityName");
-
-                // searchBtn.addEventListener('click', () => {
-                //     city.push(userInputEl.value);
-                //     console.log( value);
-                // })
-                // This line call back city name from local storage.
-                // var memory = document.getElementById("cityStore").textContent = city.value;
                 displayReport(data);
-                // memory.appendChild(city);
+                
                     })
                 })
                
@@ -109,13 +96,8 @@ function getApi(requestUrl) {
 
     // Function that display data from api.
     var displayReport = function (searchTerm) {
-        // console.log(searchTerm);
-        // if (data.daily.length === 0) {
-        // weatherContainerEl.textContent = "No Report Found.";
-        // return;
-        // }  
-        // reportSearchTerm.textContent = searchTerm;
 
+        // This line is setting empty string, and clearing the data from previus research.
         fiveDaysReport.innerHTML = '';
 
         // for loop code for display five days datas in the cards.
@@ -381,3 +363,32 @@ cityFormEl.addEventListener('submit', formSubmitHandler);
 
             // <img src=http://openweathermap.org/img/w/" 
             //     + data.current.weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'>
+
+            // memory.appendChild(city);
+
+                    // console.log(searchTerm);
+        // if (data.daily.length === 0) {
+        // weatherContainerEl.textContent = "No Report Found.";
+        // return;
+        // }  
+        // reportSearchTerm.textContent = searchTerm;
+
+                        // localStorage.setItem("city", JSON.stringify({city}));
+                // var city = localStorage.getItem("cityName");
+
+                // searchBtn.addEventListener('click', () => {
+                //     city.push(userInputEl.value);
+                //     console.log( value);
+                // })
+                // This line call back city name from local storage.
+                // var memory = document.getElementById("cityStore").textContent = city.value;
+
+                                // // console.log("Temp:", data.list[0].main.temp,
+                // "Humidity:", data.list[0].main.humidity,
+                // "Wind speed:", data.list[0].wind.speed);
+
+                                // let curDate = data.list[0].dt_txt;
+                // let curImg = "src=http://openweathermap.org/img/w/" + data.list[0].weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'";
+
+
+                    //   cardHeaderEl.textContent = '';
