@@ -77,15 +77,23 @@ function getApi(requestUrl) {
                 // allcities.push(userInputEl.value.trim());
                 allcities.push(userSearch);
                 
+
+                localStorage.setItem("cities", JSON.stringify(allcities));
                 // var sameCityAgain = "https://api.openweathermap.org/data/2.5/onecall?cnt=6&lat=" + allcities + "&exclude=minutely,hourly&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
 
+                
+                
+                // These lines remove dublicated buttons.
+                cityStoreEl.innerHTML ="";
+                
                 // This lines make buttons for city names in the page, will iterate by user search.
-                let = 1;
                 for (let i = 0; i < allcities.length; i++) {
                      let searchAgain = document.createElement("button");
                      searchAgain.innerHTML = i;
                      cityStoreEl.appendChild(searchAgain);
-                     searchAgain.addEventListener("click", function getApi(sameCityAgain) {
+                     searchAgain.addEventListener("click", function (event) {
+                         console.log(event.target.innerHTML);
+                         getApi(event.target.innerHTML);
                      });
                      searchAgain.classList.add("city-btn");
                      searchAgain.textContent = allcities[i];
