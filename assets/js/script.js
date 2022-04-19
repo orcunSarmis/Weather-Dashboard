@@ -11,8 +11,7 @@ var cityStoreEl = document.querySelector("#cityStore");
 var curDate = moment().format("MM/DD/YYYY");
 var userSearch = "";
 
-
-function showSearch() {
+ function showSearch() {
 
     $(".showCity").empty();
    
@@ -24,7 +23,7 @@ function showSearch() {
         listCity.setAttribute("class", "list-group-item");
         listCity.value = city;
         listCity.textContent = city;
-        listCity.addEventListener("click", searchCity)                   
+        listCity.addEventListener("click", userSearch)                   
         listGroup.append(listCity);                                        
     })
 };
@@ -39,8 +38,8 @@ var formSubmitHandler = function (event) {
     //     document.getElementById("show-hide").style.display = "none";
     // }
 
-
-    userSearch = userInputEl.value.trim();
+    // userInputEl.value.trim();
+    userSearch = event.target.value;
   
     // These lines checks get api fucntion's inputs are not empty.
     if (userSearch) {
@@ -108,7 +107,7 @@ function getApi(requestUrl) {
                 // This lines make buttons for city names in the page, will iterate by user search.
 
 
-                function searchCity(){
+               var eventlistner =  function searchCity(){
                     console.log(this.textContent)
                     curTemp.empty();
                     curWind.empty();
@@ -119,7 +118,7 @@ function getApi(requestUrl) {
                 }
                 // These lines remove dublicated buttons.
                 // cityStoreEl.innerHTML = "";
-                getApi(showSearch);
+                
                 
                 // for (let i = 0; i < allcities.length; i++) {
                 //      let searchAgain = document.createElement("button");
