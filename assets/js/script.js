@@ -10,26 +10,193 @@ var fiveDaysReport = document.querySelector("#five-days-report");
 var cityStoreEl = document.querySelector("#cityStore");
 var curDate = moment().format("MM/DD/YYYY");
 var userSearch = "";
-
- function showSearch() {
-
-    $(".showCity").empty();
-   
-    JSON.parse(localStorage.getItem("cities"));
-
-
-    allcities.forEach(function (city){
-        var listCity = document.createElement("li");
-        listCity.setAttribute("class", "list-group-item");
-        listCity.value = city;
-        listCity.textContent = city;
-        listCity.addEventListener("click", userSearch)                   
-        listGroup.append(listCity);                                        
-    })
+function showSearch() {
+   $(".showCity").empty();
+ 
+   var allcities = JSON.parse(localStorage.getItem("cities")) || [];
+   console.log(allcities)
+   allcities.forEach(function (city){
+       var listCity = document.createElement("li");
+       listCity.setAttribute("class", "list-group-item");
+       listCity.value = city;
+       listCity.textContent = city;
+       listCity.addEventListener("click", buttonSubmitHandler)                  
+       $(".showCity").append(listCity);                                        
+   })
 };
 // These function is main submit event handler.
 var formSubmitHandler = function (event) {
-    event.preventDefault();
+   event.preventDefault();
+   
+   // These lines for hiding main card.
+   // if(show-con === inline) {
+   //     document.getElementById("show-hide").style.display = "inline";
+   // }else {
+   //     document.getElementById("show-hide").style.display = "none";
+   // }
+   // userInputEl.value.trim();
+   userSearch = userInputEl.value.trim();
+ 
+   // These lines checks get api fucntion's inputs are not empty.
+   if (userSearch) {
+       getApi("https://api.openweathermap.org/data/2.5/forecast?q=" + userSearch + "&cnt=6&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial");      
+     weatherContainerEl.textContent = '';
+     userInputEl.value = '';
+   } else {
+     alert('Please enter a City!');
+   }
+};
+var buttonSubmitHandler = function (event) {
+   event.preventDefault();
+   
+   // These lines for hiding main card.
+   // if(show-con === inline) {
+   //     document.getElementById("show-hide").style.display = "inline";
+   // }else {
+   //     document.getElementById("show-hide").style.display = "none";
+   // }
+   // userInputEl.value.trim();
+   userSearch = event.target.textContent;
+ 
+   // These lines checks get api fucntion's inputs are not empty.
+   if (userSearch) {
+       getApi("https://api.openweathermap.org/data/2.5/forecast?q=" + userSearch + "&cnt=6&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial");      
+     weatherContainerEl.textContent = '';
+     userInputEl.value = '';
+   } else {
+     alert('Please enter a City!');
+   }
+};
+// These lines are the main functions that who contain two fetch for user search.
+function getApi(requestUrl) {
+   let lat, lon;
+   // First api cal for City name and lat and lon datas.
+   fetch(requestUrl)
+   .then(function (response)  {
+       if (response.ok){
+           response.json().then(function (data) {
+               // console.log(data);
+             
+               // These lines for declare data from api in variable.
+               let cityName = data.city.name;
+               let curTemp = data.list[0].main.temp;
+               let curWind = data.list[0].wind.speed;
+               let curHumid = data.list[0].main.humidity;
+               lat = data.city.coord.lat;
+               lon = data.city.coord.lon;
+               // Second fetch URL.
+               var fiveDaysUrl = "https://api.openweathermap.org/data/2.5/onecall?cnt=6&lat=" +
+
+
+lat + "&lon=" + lon + "&exclude=minutely,hourly&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
+   // These lines second api call for pick up UV index.
+   fetch(fiveDaysUrl)
+   .then((res2) => {
+               res2.json().then(function (data) {
+               // This line declare UV index in variable.
+               var curUV = data.current.uvi;
+               // These lines display all data in main card.
+               weatherContainerEl.innerHTML = "<h1>" + cityName + " (" + curDate + ") </h1><img src=http://openweathermap.org/img/w/"
+               + data.current.weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'><h3>Temp: "
+               + curTemp + "</h3><h3>Wind Speed: " + curWind + "</h3><h3>Humidity: " + curHumid + "</h3><h3>UV Index: " + curUV + "</h3>";
+               // if (curUV <= 2 ) {
+               //     document.getElementById("").style.backgroundColor = "green";
+               // }else if (curUV >2 && curUV <= 5) {
+               //     document.getElementById("").style.backgroundColor = "orange";
+               // }else if (curUV > 5 && curUV = 7){
+               //     document.getElementById("").style.backgroundColor = "red";
+               // }
+               // Add user input cities name in local storage.
+               var allcities = JSON.parse(localStorage.getItem("cities")) || [];
+               // allcities.push(userInputEl.value.trim());
+               allcities.push(userSearch);
+               
+               localStorage.setItem("cities", JSON.stringify(allcities));
+               // var sameCityAgain = "https://api.openweathermap.org/data/2.5/onecall?cnt=6&lat=" + allcities + "&exclude=minutely,hourly&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
+               // This lines make buttons for city names in the page, will iterate by user search.
+               // These lines remove dublicated buttons.
+               // cityStoreEl.innerHTML = "";
+               
+               
+               // for (let i = 0; i < allcities.length; i++) {
+               //      let searchAgain = document.createElement("button");
+               //      searchAgain.innerHTML = i;
+               //      cityStoreEl.appendChild(searchAgain);
+               //      searchAgain.addEventListener("click", function (event) {
+               //         //  console.log(event.target.innerHTML);
+               //          var sameCityAgain = "https://api.openweathermap.org/data/2.5/forecast?q=" + event.target.innerHTML + "&cnt=6&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
+               //          getApi(sameCityAgain);
+               //      });
+               //      searchAgain.classList.add("city-btn");
+               //      searchAgain.textContent = allcities[i];
+               // }
+               displayReport(data);
+               showSearch()
+                   })
+               })
+             
+           });
+       }else {
+           alert("error: " + response.statusText);
+       }
+   // This lines catching the error and display alert note.
+   }).catch(function (error) {
+           alert("Try again.");
+       });    
+   };
+   // Function that display data from api.
+   var displayReport = function (searchTerm) {
+       // This line is setting empty string, and clearing the data from previus research.
+       fiveDaysReport.innerHTML = '';
+       // for loop code for display five days datas in the cards.
+       for (var i = 1; i < 6; i++) {
+           // These lines display main date, with moment format the date.
+           var titleEl = document.createElement("p");
+           titleEl.textContent = moment.unix(searchTerm.daily[i].dt).format("MM/DD/YYYY");
+
+// console.log(searchTerm);
+           // These lines create img tag in html and set icon in variable, with its path.
+           var iconEl = document.createElement("img");
+           var iconSrcAttr = 'http://openweathermap.org/img/w/'+ searchTerm.daily[i].weather[0].icon + '.png';
+           iconEl.setAttribute('src', iconSrcAttr);
+           
+           // These lines display main temprature.
+           var tempEl = document.createElement("p");
+           tempEl.textContent = "Temp: " + searchTerm.daily[i].temp.day;
+           // console.log(searchTerm);
+           // These lines display main wind.
+           var windEl = document.createElement("p");
+           windEl.textContent = "Wind: " + searchTerm.daily[i].wind_speed;
+           // console.log(searchTerm);
+           // These lines display main humidity.
+           var humidEl = document.createElement("p");
+           humidEl.textContent = "Humidity: " + searchTerm.daily[i].humidity;
+           // console.log(searchTerm);
+           // These lines for create div element and display data from api.  
+           var reportEl = document.createElement("div");
+           reportEl.classList =  'list-item justify-space-between ';
+           // These are data implementation to html.
+           reportEl.appendChild(titleEl);
+           reportEl.appendChild(iconEl);
+           reportEl.appendChild(tempEl);
+           reportEl.appendChild(windEl);
+           reportEl.appendChild(humidEl);
+           
+           // These lines set five days data in html.
+           fiveDaysReport.appendChild(reportEl);
+       }      
+   };
+cityFormEl.addEventListener('submit', formSubmitHandler);
+
+
+
+
+
+
+// These lines calling the html elements and url, store in variables.
+
+// These function is main submit event handler.
+
     
     // These lines for hiding main card.
     // if(show-con === inline) {
@@ -39,54 +206,31 @@ var formSubmitHandler = function (event) {
     // }
 
     // userInputEl.value.trim();
-    userSearch = event.target.value;
+   
   
     // These lines checks get api fucntion's inputs are not empty.
-    if (userSearch) {
-        getApi("https://api.openweathermap.org/data/2.5/forecast?q=" + userSearch + "&cnt=6&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial");       
-      weatherContainerEl.textContent = '';
-      userInputEl.value = '';
-    } else {
-      alert('Please enter a City!');
-    }
-};
+
 
 // These lines are the main functions that who contain two fetch for user search.
-function getApi(requestUrl) {
-    let lat, lon;
+
 
     // First api cal for City name and lat and lon datas.
-    fetch(requestUrl)
-    .then(function (response)  {
-        if (response.ok){
-            response.json().then(function (data) {
+ 
                 // console.log(data);
                
                 // These lines for declare data from api in variable.
-                let cityName = data.city.name;
-                let curTemp = data.list[0].main.temp;
-                let curWind = data.list[0].wind.speed;
-                let curHumid = data.list[0].main.humidity;
-
-                lat = data.city.coord.lat;
-                lon = data.city.coord.lon;
 
                 // Second fetch URL.
-                var fiveDaysUrl = "https://api.openweathermap.org/data/2.5/onecall?cnt=6&lat=" + 
-                lat + "&lon=" + lon + "&exclude=minutely,hourly&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
+
 
     // These lines second api call for pick up UV index.
-    fetch(fiveDaysUrl)
-    .then((res2) => {
-                res2.json().then(function (data) {
+
 
                 // This line declare UV index in variable.
-                var curUV = data.current.uvi;
+
 
                 // These lines display all data in main card.
-                weatherContainerEl.innerHTML = "<h1>" + cityName + " (" + curDate + ") </h1><img src=http://openweathermap.org/img/w/" 
-                + data.current.weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'><h3>Temp: "
-                + curTemp + "</h3><h3>Wind Speed: " + curWind + "</h3><h3>Humidity: " + curHumid + "</h3><h3>UV Index: " + curUV + "</h3>";
+
 
                 // if (curUV <= 2 ) {
                 //     document.getElementById("").style.backgroundColor = "green";
@@ -97,25 +241,19 @@ function getApi(requestUrl) {
                 // }
 
                 // Add user input cities name in local storage.
-                var allcities = JSON.parse(localStorage.getItem("cities")) || [];
+             
                 // allcities.push(userInputEl.value.trim());
-                allcities.push(userSearch);
+
                 
-                localStorage.setItem("cities", JSON.stringify(allcities));
+
                 // var sameCityAgain = "https://api.openweathermap.org/data/2.5/onecall?cnt=6&lat=" + allcities + "&exclude=minutely,hourly&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
 
                 // This lines make buttons for city names in the page, will iterate by user search.
 
 
-               var eventlistner =  function searchCity(){
-                    console.log(this.textContent)
-                    curTemp.empty();
-                    curWind.empty();
-                    curHumid.empty();
-                    showSearch();
-                    getWeather(this.textContent);
+
                         
-                }
+            
                 // These lines remove dublicated buttons.
                 // cityStoreEl.innerHTML = "";
                 
@@ -133,72 +271,48 @@ function getApi(requestUrl) {
                 //      searchAgain.textContent = allcities[i];
                 // }
 
-                displayReport(data);
-                
-                    })
-                })
-               
-            });
-        }else {
-            alert("error: " + response.statusText);
-        }
+
+    
     // This lines catching the error and display alert note. 
-    }).catch(function (error) {
-            alert("Try again.");
-        });     
-    };
+
 
     // Function that display data from api.
-    var displayReport = function (searchTerm) {
+
 
         // This line is setting empty string, and clearing the data from previus research.
-        fiveDaysReport.innerHTML = '';
+
 
         // for loop code for display five days datas in the cards.
-        for (var i = 1; i < 6; i++) {
+
 
             // These lines display main date, with moment format the date.
-            var titleEl = document.createElement("p");
-            titleEl.textContent = moment.unix(searchTerm.daily[i].dt).format("MM/DD/YYYY");
+
             // console.log(searchTerm);
 
             // These lines create img tag in html and set icon in variable, with its path.
-            var iconEl = document.createElement("img");
-            var iconSrcAttr = 'http://openweathermap.org/img/w/'+ searchTerm.daily[i].weather[0].icon + '.png';
-            iconEl.setAttribute('src', iconSrcAttr);
+
             
             // These lines display main temprature.
-            var tempEl = document.createElement("p");
-            tempEl.textContent = "Temp: " + searchTerm.daily[i].temp.day;
+
             // console.log(searchTerm);
 
             // These lines display main wind.
-            var windEl = document.createElement("p");
-            windEl.textContent = "Wind: " + searchTerm.daily[i].wind_speed;
+
             // console.log(searchTerm);
 
             // These lines display main humidity.
-            var humidEl = document.createElement("p");
-            humidEl.textContent = "Humidity: " + searchTerm.daily[i].humidity;
+
             // console.log(searchTerm);
 
             // These lines for create div element and display data from api.   
-            var reportEl = document.createElement("div");
-            reportEl.classList =  'list-item justify-space-between ';
+
 
             // These are data implementation to html.
-            reportEl.appendChild(titleEl);
-            reportEl.appendChild(iconEl);
-            reportEl.appendChild(tempEl);
-            reportEl.appendChild(windEl);
-            reportEl.appendChild(humidEl);
+
             
             // These lines set five days data in html.
-            fiveDaysReport.appendChild(reportEl);
-        }       
-    };
 
-cityFormEl.addEventListener('submit', formSubmitHandler);
+
 
 
 
