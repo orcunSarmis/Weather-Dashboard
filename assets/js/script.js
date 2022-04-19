@@ -72,6 +72,10 @@ function getApi(requestUrl) {
                 + data.current.weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'><h3>Temp: "
                 + curTemp + "</h3><h3>Wind Speed: " + curWind + "</h3><h3>Humidity: " + curHumid + "</h3><h3>UV Index: " + curUV + "</h3>";
 
+                if (curUV < 2 ) {
+                    
+                }
+
                 // Add user input cities name in local storage.
                 var allcities = JSON.parse(localStorage.getItem("cities")) || [];
                 // allcities.push(userInputEl.value.trim());
@@ -80,12 +84,13 @@ function getApi(requestUrl) {
                 localStorage.setItem("cities", JSON.stringify(allcities));
                 // var sameCityAgain = "https://api.openweathermap.org/data/2.5/onecall?cnt=6&lat=" + allcities + "&exclude=minutely,hourly&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
 
-                
+                // This lines make buttons for city names in the page, will iterate by user search.
                 function showSearch() {
 
                     $(".list-group").empty();
                    
                     JSON.parse(localStorage.getItem("cities"));
+                    console.log("working");
                 
                     cities.forEach(function (city){
                         var listCity = document.createElement("li")
@@ -112,7 +117,7 @@ function getApi(requestUrl) {
                 // These lines remove dublicated buttons.
                 // cityStoreEl.innerHTML = "";
                 
-                // This lines make buttons for city names in the page, will iterate by user search.
+                
                 // for (let i = 0; i < allcities.length; i++) {
                 //      let searchAgain = document.createElement("button");
                 //      searchAgain.innerHTML = i;
