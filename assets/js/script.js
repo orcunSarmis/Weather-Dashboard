@@ -91,29 +91,26 @@ function getApi(requestUrl) {
                 // This lines make buttons for city names in the page, will iterate by user search.
                 function showSearch() {
 
-                    $(".list-group").empty();
+                    $(".showCity").empty();
                    
                     JSON.parse(localStorage.getItem("cities"));
-                    console.log("working");
                 
-                    cities.forEach(function (city){
-                        var listCity = document.createElement("li")
-                        
+                
+                    allcities.forEach(function (city){
+                        var listCity = document.createElement("li");
                         listCity.setAttribute("class", "list-group-item");
                         listCity.value = city;
                         listCity.textContent = city;
-                        listCity.addEventListener("click", searchCity)
-                       
-                        listGroup.append(listCity);                        
-                
+                        listCity.addEventListener("click", searchCity)                   
+                        listGroup.append(listCity);                                        
                     })
                 };
 
                 function searchCity(){
                     console.log(this.textContent)
-                    weatherResults.empty();
-                    forcastContainer.empty();
-                    uvContainer.empty();
+                    curTemp.empty();
+                    curWind.empty();
+                    curHumid.empty();
                     showSearch();
                     getWeather(this.textContent);
                         
