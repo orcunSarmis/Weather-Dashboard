@@ -11,10 +11,27 @@ var cityStoreEl = document.querySelector("#cityStore");
 var curDate = moment().format("MM/DD/YYYY");
 var userSearch = "";
 
+
+function showSearch() {
+
+    $(".showCity").empty();
+   
+    JSON.parse(localStorage.getItem("cities"));
+
+
+    allcities.forEach(function (city){
+        var listCity = document.createElement("li");
+        listCity.setAttribute("class", "list-group-item");
+        listCity.value = city;
+        listCity.textContent = city;
+        listCity.addEventListener("click", searchCity)                   
+        listGroup.append(listCity);                                        
+    })
+};
 // These function is main submit event handler.
 var formSubmitHandler = function (event) {
     event.preventDefault();
-
+    
     // These lines for hiding main card.
     // if(show-con === inline) {
     //     document.getElementById("show-hide").style.display = "inline";
@@ -89,22 +106,7 @@ function getApi(requestUrl) {
                 // var sameCityAgain = "https://api.openweathermap.org/data/2.5/onecall?cnt=6&lat=" + allcities + "&exclude=minutely,hourly&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
 
                 // This lines make buttons for city names in the page, will iterate by user search.
-                function showSearch() {
 
-                    $(".showCity").empty();
-                   
-                    JSON.parse(localStorage.getItem("cities"));
-                
-                
-                    allcities.forEach(function (city){
-                        var listCity = document.createElement("li");
-                        listCity.setAttribute("class", "list-group-item");
-                        listCity.value = city;
-                        listCity.textContent = city;
-                        listCity.addEventListener("click", searchCity)                   
-                        listGroup.append(listCity);                                        
-                    })
-                };
 
                 function searchCity(){
                     console.log(this.textContent)
@@ -117,7 +119,7 @@ function getApi(requestUrl) {
                 }
                 // These lines remove dublicated buttons.
                 // cityStoreEl.innerHTML = "";
-                
+                getApi(showSearch);
                 
                 // for (let i = 0; i < allcities.length; i++) {
                 //      let searchAgain = document.createElement("button");
@@ -143,7 +145,7 @@ function getApi(requestUrl) {
         }
     // This lines catching the error and display alert note. 
     }).catch(function (error) {
-            alert("UPPPSSS");
+            alert("Try again.");
         });     
     };
 
