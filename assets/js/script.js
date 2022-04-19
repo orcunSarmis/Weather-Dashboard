@@ -77,28 +77,54 @@ function getApi(requestUrl) {
                 // allcities.push(userInputEl.value.trim());
                 allcities.push(userSearch);
                 
-
                 localStorage.setItem("cities", JSON.stringify(allcities));
                 // var sameCityAgain = "https://api.openweathermap.org/data/2.5/onecall?cnt=6&lat=" + allcities + "&exclude=minutely,hourly&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
 
                 
+                function showSearch() {
+
+                    $(".list-group").empty();
+                   
+                    JSON.parse(localStorage.getItem("cities"));
                 
+                    cities.forEach(function (city){
+                        var listCity = document.createElement("li")
+                        
+                        listCity.setAttribute("class", "list-group-item");
+                        listCity.value = city;
+                        listCity.textContent = city;
+                        listCity.addEventListener("click", searchCity)
+                       
+                        listGroup.append(listCity);                        
+                
+                    })
+                };
+
+                function searchCity(){
+                    console.log(this.textContent)
+                    weatherResults.empty();
+                    forcastContainer.empty();
+                    uvContainer.empty();
+                    showSearch();
+                    getWeather(this.textContent);
+                        
+                }
                 // These lines remove dublicated buttons.
-                cityStoreEl.innerHTML = "";
+                // cityStoreEl.innerHTML = "";
                 
                 // This lines make buttons for city names in the page, will iterate by user search.
-                for (let i = 0; i < allcities.length; i++) {
-                     let searchAgain = document.createElement("button");
-                     searchAgain.innerHTML = i;
-                     cityStoreEl.appendChild(searchAgain);
-                     searchAgain.addEventListener("click", function (event) {
-                        //  console.log(event.target.innerHTML);
-                         var sameCityAgain = "https://api.openweathermap.org/data/2.5/forecast?q=" + event.target.innerHTML + "&cnt=6&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
-                         getApi(sameCityAgain);
-                     });
-                     searchAgain.classList.add("city-btn");
-                     searchAgain.textContent = allcities[i];
-                }
+                // for (let i = 0; i < allcities.length; i++) {
+                //      let searchAgain = document.createElement("button");
+                //      searchAgain.innerHTML = i;
+                //      cityStoreEl.appendChild(searchAgain);
+                //      searchAgain.addEventListener("click", function (event) {
+                //         //  console.log(event.target.innerHTML);
+                //          var sameCityAgain = "https://api.openweathermap.org/data/2.5/forecast?q=" + event.target.innerHTML + "&cnt=6&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
+                //          getApi(sameCityAgain);
+                //      });
+                //      searchAgain.classList.add("city-btn");
+                //      searchAgain.textContent = allcities[i];
+                // }
 
                 displayReport(data);
                 
