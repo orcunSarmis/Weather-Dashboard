@@ -84,7 +84,7 @@ function getApi(requestUrl) {
                 
                 
                 // These lines remove dublicated buttons.
-                cityStoreEl.innerHTML ="";
+                cityStoreEl.innerHTML = "";
                 
                 // This lines make buttons for city names in the page, will iterate by user search.
                 for (let i = 0; i < allcities.length; i++) {
