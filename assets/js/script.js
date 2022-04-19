@@ -72,9 +72,13 @@ function getApi(requestUrl) {
                 + data.current.weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'><h3>Temp: "
                 + curTemp + "</h3><h3>Wind Speed: " + curWind + "</h3><h3>Humidity: " + curHumid + "</h3><h3>UV Index: " + curUV + "</h3>";
 
-                if (curUV < 2 ) {
-                    
-                }
+                // if (curUV <= 2 ) {
+                //     document.getElementById("").style.backgroundColor = "green";
+                // }else if (curUV >2 && curUV <= 5) {
+                //     document.getElementById("").style.backgroundColor = "orange";
+                // }else if (curUV > 5 && curUV = 7){
+                //     document.getElementById("").style.backgroundColor = "red";
+                // }
 
                 // Add user input cities name in local storage.
                 var allcities = JSON.parse(localStorage.getItem("cities")) || [];
