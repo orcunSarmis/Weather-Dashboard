@@ -18,7 +18,7 @@ This weather dashboard features dynamically updated HTML and CSS, allowing users
 
 Open the URL in your web browser.
 
-URL Link
+URL Link: https://orcunsarmis.github.io/Weather-Dashboard/
 
 ## Built With
 
