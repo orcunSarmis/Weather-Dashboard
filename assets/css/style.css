@@ -20,6 +20,7 @@
     font-size: 16px;
   }
   
+  /* Style all h elements */
   h1,
   h2,
   h3,
@@ -206,16 +207,22 @@
   
   /* col-sm */
   @media screen and (min-width: 640px) {
-    
+    header, main, .list-item {
+      flex-direction: row;
+    }
   }
   
   /* col-md */
   @media screen and (min-width: 768px) {
-    
+    header, main, .list-item {
+      flex-direction: row;
+    }
   }
   
   /* col-lg */
   @media screen and (min-width: 992px) {
-   
+    header, main, .list-item {
+      flex-direction: row;
+    }
   }
   

@@ -29,7 +29,7 @@ var formSubmitHandler = function (event) {
    event.preventDefault();
    
    // These lines for hiding main card.
-       document.getElementById("show-hide").classList.remove("hidden");
+    //    document.getElementById("show-hide").classList.remove("hidden");
 
    
     // This line for removes whitespace from both ends of a string and returns a new string,
@@ -90,16 +90,17 @@ lat + "&lon=" + lon + "&exclude=minutely,hourly&appid=5ee2ef72f8bcd5f71cb4cc0992
                // These lines display all data in main card.
                weatherContainerEl.innerHTML = "<h1>" + cityName + " (" + curDate + ") </h1><img src=http://openweathermap.org/img/w/"
                + data.current.weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'><h3>Temp: "
-               + curTemp + "</h3><h3>Wind Speed: " + curWind + "</h3><h3>Humidity: " + curHumid + "</h3><h3>UV Index: " + curUV + "</h3>";
+               + curTemp + "</h3><h3>Wind Speed: " + curWind + "</h3><h3>Humidity: " + curHumid + "</h3><h3>UV Index: " + "<span id='UVI'>" + curUV + "</span>" + "</h3>";
 
             //    These lines for change color of uv index
-               // if (curUV <= 2 ) {
-               //     document.getElementById("").style.backgroundColor = "green";
-               // }else if (curUV >2 && curUV <= 5) {
-               //     document.getElementById("").style.backgroundColor = "orange";
-               // }else if (curUV > 5 && curUV = 7){
-               //     document.getElementById("").style.backgroundColor = "red";
-               // }
+               if (curUV <= 2 ) {
+                   document.getElementById("UVI").style.backgroundColor = "green";
+               }else if (curUV >2 && curUV <= 5) {
+                   document.getElementById("UVI").style.backgroundColor = "orange";
+               }else if (curUV > 5 && curUV <= 7){
+                   document.getElementById("UVI").style.backgroundColor = "red";
+               }
+
                // Add user input cities name in local storage.
                var allcities = JSON.parse(localStorage.getItem("cities")) || [];
                // allcities.push(userInputEl.value.trim());
