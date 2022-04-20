@@ -215,9 +215,9 @@
   }
   
   /* col-md */
-  @media screen and (min-width: 768px) {
-    header, main, .list-item {
-      flex-direction: row;
+  @media screen and (max-width: 768px) {
+    #five-days-report {
+      flex-direction: column;
     }
   }
   
