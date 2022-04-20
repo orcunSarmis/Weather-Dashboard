@@ -28,15 +28,11 @@ HTML, CSS, JavaScript, OpenWeather One Call API
 
 The weather dashboard is designed to display current and future (5 days) weather conditions for a city including temperature, humidity, wind speed and UV index. The dashboard also uses a colour coding system for the UV index to enable users to quickly understand whether the conditions are favourable, moderate or severe. Previous search are automatically added to the search history to facilitate the user experience. 
 
-When searching for a city, I am presented with current and future conditions for that city and that city is added to the search history:
+When searching for a city, I am presented with current and future conditions for that city and that city is added to the search history.
 
-[Screenshot]
+When I view current weather conditions for that city, then I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index.
 
-When I view current weather conditions for that city, then I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index:
-
-[Screenshot] 
-
-When I view the UV index, then I am presented with a colour that indicates whether the conditions are favourable, moderate, or severe:
+When I view the UV index, then I am presented with a colour that indicates whether the conditions are favourable, moderate, or severe.
 
 [Screenshot]
 
