@@ -97,7 +97,7 @@ lat + "&lon=" + lon + "&exclude=minutely,hourly&appid=5ee2ef72f8bcd5f71cb4cc0992
                    document.getElementById("UVI").style.backgroundColor = "green";
                }else if (curUV >2 && curUV <= 5) {
                    document.getElementById("UVI").style.backgroundColor = "orange";
-               }else if (curUV > 5 && curUV <= 7){
+               }else if (curUV > 5 && curUV <= 7 && curUV > 7){
                    document.getElementById("UVI").style.backgroundColor = "red";
                }
 
