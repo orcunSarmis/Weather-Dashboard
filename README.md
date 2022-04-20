@@ -68,4 +68,4 @@ Ideas to improve this application are welcome:
 ## Contact
 
 Orcun Sarmis: yorcunsarmis@gmail.com
-Project Link: https://github.com/orcunSarmis/PortfolioOS
+Project Link: https://github.com/orcunSarmis/Weather-Dashboard
