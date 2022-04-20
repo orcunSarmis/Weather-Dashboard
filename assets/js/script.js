@@ -31,8 +31,8 @@ var formSubmitHandler = function (event) {
    event.preventDefault();
    
    // These lines for hiding main card.
-    //    document.getElementById("show-hide").classList.remove("hidden");
-
+       document.getElementById("show-hide").classList.remove("hidden");
+       document.getElementById("dont-hide").classList.remove("hidden");
    
     // This line for removes whitespace from both ends of a string and returns a new string,
    userSearch = userInputEl.value.trim();
