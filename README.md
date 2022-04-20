@@ -34,15 +34,20 @@ When I view current weather conditions for that city, then I am presented with t
 
 When I view the UV index, then I am presented with a colour that indicates whether the conditions are favourable, moderate, or severe.
 
-[Screenshot]
+
+![uv 2](https://user-images.githubusercontent.com/79064464/164214856-45666468-bc7e-4b51-9e15-aa0f0087e804.png)
+![uv 1](https://user-images.githubusercontent.com/79064464/164214919-046a3123-7cc2-4d8d-81ea-4b5e22263635.png)
+![uv3](https://user-images.githubusercontent.com/79064464/164214973-484fab92-734e-4786-9d7f-3d54e6d0bdf5.png)
 
 When I view future weather conditions for that city, then I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity:
 
-[Screenshot]
+
+![uv 1](https://user-images.githubusercontent.com/79064464/164215025-4a632454-b566-4812-a2e0-f2eb4b91ccce.png)
 
 When I click on a city in the search history, then I am again presented with current and future conditions for that city: 
 
-[Screenshot]
+![uv3](https://user-images.githubusercontent.com/79064464/164215046-f0bff0c9-e900-427a-ae4f-f5ae01e9d383.png)
+
 
 ## License
 
