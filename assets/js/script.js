@@ -14,7 +14,7 @@ function showSearch() {
    $(".showCity").empty();
  
    var allcities = JSON.parse(localStorage.getItem("cities")) || [];
-   console.log(allcities)
+//    console.log(allcities)
    allcities.forEach(function (city){
        var listCity = document.createElement("li");
        listCity.setAttribute("class", "list-group-item");
@@ -29,12 +29,10 @@ var formSubmitHandler = function (event) {
    event.preventDefault();
    
    // These lines for hiding main card.
-   // if(show-con === inline) {
-   //     document.getElementById("show-hide").style.display = "inline";
-   // }else {
-   //     document.getElementById("show-hide").style.display = "none";
-   // }
-   // userInputEl.value.trim();
+       document.getElementById("show-hide").classList.remove("hidden");
+
+   
+    // This line for removes whitespace from both ends of a string and returns a new string,
    userSearch = userInputEl.value.trim();
  
    // These lines checks get api fucntion's inputs are not empty.
@@ -47,15 +45,9 @@ var formSubmitHandler = function (event) {
    }
 };
 var buttonSubmitHandler = function (event) {
-   event.preventDefault();
-   
-   // These lines for hiding main card.
-   // if(show-con === inline) {
-   //     document.getElementById("show-hide").style.display = "inline";
-   // }else {
-   //     document.getElementById("show-hide").style.display = "none";
-   // }
-   // userInputEl.value.trim();
+   event.preventDefault(); 
+
+//    This line returns the element that triggered the event.
    userSearch = event.target.textContent;
  
    // These lines checks get api fucntion's inputs are not empty.
@@ -99,6 +91,8 @@ lat + "&lon=" + lon + "&exclude=minutely,hourly&appid=5ee2ef72f8bcd5f71cb4cc0992
                weatherContainerEl.innerHTML = "<h1>" + cityName + " (" + curDate + ") </h1><img src=http://openweathermap.org/img/w/"
                + data.current.weather[0].icon + ".png alt='Icon depicting current weather' width='50' height='50'><h3>Temp: "
                + curTemp + "</h3><h3>Wind Speed: " + curWind + "</h3><h3>Humidity: " + curHumid + "</h3><h3>UV Index: " + curUV + "</h3>";
+
+            //    These lines for change color of uv index
                // if (curUV <= 2 ) {
                //     document.getElementById("").style.backgroundColor = "green";
                // }else if (curUV >2 && curUV <= 5) {
@@ -112,24 +106,9 @@ lat + "&lon=" + lon + "&exclude=minutely,hourly&appid=5ee2ef72f8bcd5f71cb4cc0992
                allcities.push(userSearch);
                
                localStorage.setItem("cities", JSON.stringify(allcities));
-               // var sameCityAgain = "https://api.openweathermap.org/data/2.5/onecall?cnt=6&lat=" + allcities + "&exclude=minutely,hourly&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
-               // This lines make buttons for city names in the page, will iterate by user search.
-               // These lines remove dublicated buttons.
-               // cityStoreEl.innerHTML = "";
+
                
                
-               // for (let i = 0; i < allcities.length; i++) {
-               //      let searchAgain = document.createElement("button");
-               //      searchAgain.innerHTML = i;
-               //      cityStoreEl.appendChild(searchAgain);
-               //      searchAgain.addEventListener("click", function (event) {
-               //         //  console.log(event.target.innerHTML);
-               //          var sameCityAgain = "https://api.openweathermap.org/data/2.5/forecast?q=" + event.target.innerHTML + "&cnt=6&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
-               //          getApi(sameCityAgain);
-               //      });
-               //      searchAgain.classList.add("city-btn");
-               //      searchAgain.textContent = allcities[i];
-               // }
                displayReport(data);
                showSearch()
                    })
@@ -175,6 +154,7 @@ lat + "&lon=" + lon + "&exclude=minutely,hourly&appid=5ee2ef72f8bcd5f71cb4cc0992
            // These lines for create div element and display data from api.  
            var reportEl = document.createElement("div");
            reportEl.classList =  'list-item justify-space-between ';
+           
            // These are data implementation to html.
            reportEl.appendChild(titleEl);
            reportEl.appendChild(iconEl);
@@ -191,8 +171,28 @@ cityFormEl.addEventListener('submit', formSubmitHandler);
 
 
 
+// userInputEl.value.trim();
+// ============================================================================
+               // var sameCityAgain = "https://api.openweathermap.org/data/2.5/onecall?cnt=6&lat=" + allcities + "&exclude=minutely,hourly&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
+               // This lines make buttons for city names in the page, will iterate by user search.
+               // These lines remove dublicated buttons.
+               // cityStoreEl.innerHTML = "";
+// ===============================================================================
+               // for (let i = 0; i < allcities.length; i++) {
+               //      let searchAgain = document.createElement("button");
+               //      searchAgain.innerHTML = i;
+               //      cityStoreEl.appendChild(searchAgain);
+               //      searchAgain.addEventListener("click", function (event) {
+               //         //  console.log(event.target.innerHTML);
+               //          var sameCityAgain = "https://api.openweathermap.org/data/2.5/forecast?q=" + event.target.innerHTML + "&cnt=6&exclude=hourly,daily&appid=5ee2ef72f8bcd5f71cb4cc0992822390&units=imperial";
+               //          getApi(sameCityAgain);
+               //      });
+               //      searchAgain.classList.add("city-btn");
+               //      searchAgain.textContent = allcities[i];
+               // }
+// ===========================================================
 
-
+// userInputEl.value.trim();
 // These lines calling the html elements and url, store in variables.
 
 // These function is main submit event handler.

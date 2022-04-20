@@ -41,7 +41,11 @@
     font-size: 1.2rem;
   }
   
+/* .hidden {
+  display: none;
+} */
 
+/* style button and hover animation */
   .btn {
     font-size: 1.3rem;
     text-decoration: none;
